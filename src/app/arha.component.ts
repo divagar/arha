@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./arha.component.css']
 })
 export class ArhaComponent {
-  title = 'Arha... !';
+  title = 'Arha...!';
 }

@@ -11,6 +11,7 @@ import { ArhaComponent } from './arha.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule
   ],
