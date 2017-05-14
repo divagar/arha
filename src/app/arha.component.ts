@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './arha.component.html',
   styleUrls: ['./arha.component.css']
 })
+
 export class ArhaComponent {
-  title = 'Arha...!';
 }
