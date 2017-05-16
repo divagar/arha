@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'arha',
   templateUrl: './arha.component.html',
   styleUrls: ['./arha.component.css']
 })
