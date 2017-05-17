@@ -7,10 +7,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
 import { ArhaComponent } from './arha.component';
 import 'hammerjs';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-    ArhaComponent
+    ArhaComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
