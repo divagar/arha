@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "name": "Arha",
+  "launch_path": "index.html",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "visualize your fitness",
+  "icons": {
+    "128": "assets/images/arha.png"
+  },
+  "developer": {
+    "name": "Div",
+    "url": "https://github.com/divagar"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Arha",
+      "description": "visualize your fitness"
+    }
+  }
+}
