@@ -6,8 +6,34 @@
   <title>Arha</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="visualize your fitness">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Add to homescreen -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Fallback to homescreen for Chrome <39 on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Arha">
+  <link rel="icon" sizes="192x192" href="assets/images/arha.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Arha">
+  <link rel="apple-touch-icon" href="assets/images/arha.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="assets/images/arha.png">
+  <meta name="msapplication-TileColor" content="#673AB7">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#673AB7">
 </head>
 
 <body>
@@ -16,6 +42,17 @@
       L o a d i n g &nbsp; &nbsp; A r h a . . .
     </div>
   </arha>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-6498065-XX', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 
 </html>
