@@ -1,5 +1,5 @@
 <md-toolbar color="primary">
-  <div>
+  <div [routerLink]="['/home']">
     <span class="arha-title">Arha</span>
   </div>
   <span class="fill-space"></span>
@@ -12,23 +12,21 @@
 <md-sidenav-container class="arha-container">
 
   <md-sidenav #sidenav class="arha-sidenav" align="end">
-    <md-nav-list>
-      <md-list-item class="arha-sidenav-content">
-        <a href="#"><i class="material-icons">dashboard</i> &nbsp;Home</a>
+    <md-nav-list (click)="sidenav.toggle()">
+      <md-list-item class="arha-sidenav-content" [routerLink]="['/home']">
+        <a><i class="material-icons">dashboard</i> &nbsp;Home</a>
       </md-list-item>
-      <md-list-item class="arha-sidenav-content">
-        <a href="#"><i class="material-icons">bubble_chart</i> &nbsp;Tips</a>
+      <md-list-item class="arha-sidenav-content" [routerLink]="['/tips']">
+        <a><i class="material-icons">bubble_chart</i> &nbsp;Tips</a>
       </md-list-item>
-      <md-list-item class="arha-sidenav-content">
-        <a href="#"><i class="material-icons">face</i> &nbsp;About</a>
+      <md-list-item class="arha-sidenav-content" [routerLink]="['/about']">
+        <a><i class="material-icons">face</i> &nbsp;About</a>
       </md-list-item>
     </md-nav-list>
   </md-sidenav>
 
-  <!--<div>
-    <div #root="$implicit">
+  <div>
       <router-outlet></router-outlet>
-    </div>
-  </div>-->
+  </div>
 
 </md-sidenav-container>
