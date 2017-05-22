@@ -8,6 +8,14 @@ body {
     margin: 0;
 }
 
+.mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+:focus {
+    outline: none !important;
+}
+
 arha {
  
 }
