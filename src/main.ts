@@ -9,4 +9,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(ArhaModule);
+platformBrowserDynamic()
+  .bootstrapModule(ArhaModule)
+  .then(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/worker-basic.js');
+    }
+  });
