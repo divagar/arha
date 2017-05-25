@@ -9,7 +9,11 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "arha.json",
+        "manifest.json",
+        "manifest.webapp",
+        ".htaccess"
       ],
       "index": "index.html",
       "main": "main.ts",
