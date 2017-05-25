@@ -12,7 +12,8 @@ if (environment.production) {
 platformBrowserDynamic()
   .bootstrapModule(ArhaModule)
   .then(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/worker-basic.js');
-    }
+    //TODO: To enable after the app shell is enabled.
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('/worker-basic.js');
+    // }
   });
