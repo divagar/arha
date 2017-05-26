@@ -14,13 +14,16 @@ import { HomeComponent } from './home/home.component';
 import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
+import { ArhaauthService } from './providers/arhaauth.service';
 
 @NgModule({
   declarations: [
     ArhaComponent,
     HomeComponent,
     TipsComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule
   ],
   providers: [
-    arhaRoutingProviders
+    arhaRoutingProviders,
+    ArhaauthService
   ],
   bootstrap: [ArhaComponent]
 })

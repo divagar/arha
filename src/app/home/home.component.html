@@ -1,6 +1,14 @@
-<p>
+<!--<p>
   home works!
-</p>
-<div> {{ (user | async)?.uid }} </div>
-<button (click)="login()">Login</button>
-<button (click)="logout()">Logout</button>
+</p>-->
+<!--<div> {{ (user | async)?.uid }} </div>
+<div> {{ (user | async)?.displayName }} </div>
+<div> {{ (user | async)?.email }} </div>
+<div> <img src="{{ (user | async)?.photoURL }}"> </div>-->
+
+<!--<button (click)="login()">Login</button>
+<button (click)="logout()">Logout</button>-->
+
+<button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
+
+<arha-login *ngIf="!(user | async)?.uid"></arha-login>
