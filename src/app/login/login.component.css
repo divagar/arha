@@ -1,0 +1,12 @@
+.g-signin-btn {
+    background: url("/assets/btn_google_signin.png");
+    background-size: 280px 70px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 280px;
+    height: 70px;
+}
+
+.mat-button:hover .mat-button-focus-overlay {
+    opacity: 0.2 !important;
+}
