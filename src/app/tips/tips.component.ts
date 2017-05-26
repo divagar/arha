@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-tips',
+  selector: 'arha-tips',
   templateUrl: './tips.component.html',
   styleUrls: ['./tips.component.css']
 })
