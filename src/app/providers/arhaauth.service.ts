@@ -7,11 +7,11 @@ export class ArhaauthService {
 
   constructor(public afAuth: AngularFireAuth) {
   }
-  gLogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  gLogin(): firebase.Promise<any> {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
-  gLogout() {
-    this.afAuth.auth.signOut();
+  gLogout(): firebase.Promise<any> {
+    return this.afAuth.auth.signOut();
   }
 
 }

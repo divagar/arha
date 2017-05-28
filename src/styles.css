@@ -12,6 +12,10 @@ body {
     font-family: 'Quicksand', sans-serif !important;
 }
 
+snack-bar-container {
+    background: #673AB7 !important;
+}
+
 :focus {
     outline: none !important;
 }
