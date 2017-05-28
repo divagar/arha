@@ -81,4 +81,40 @@
 .arha-sidenav-content a .material-icons {
     vertical-align: middle;
 }
-/* Sidenav content start */
+/* Sidenav content ends */
+
+/* arha user start */
+.arha-user {
+
+}
+.arha-user .row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.arha-user .cell {
+    display: table-cell;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    padding-left: 15px;
+    vertical-align: middle;
+}
+.arha-user .name {
+    color: #fff;
+    font-size: 20px;
+}
+.arha-user .photo {
+    border-radius: 50%;
+    width: 70px;
+}
+.arha-user .sign-out {
+    display: flex;
+    color: #fff;
+    font-size: 13px;
+    align-items: center;
+}
+.arha-user .sign-out .material-icons {
+     font-size: 20px;
+}
+/* arha user end */

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArhaauthService } from '../providers/arhaauth.service';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -13,15 +13,11 @@ export class HomeComponent implements OnInit {
 
   user: Observable<firebase.User>;
 
-  constructor(public authService: ArhaauthService) {
-    this.user = this.authService.afAuth.authState;
+  constructor(public afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
   }
 
   ngOnInit() {
-  }
-
-  logout() {
-    this.authService.gLogout();
   }
 
 }

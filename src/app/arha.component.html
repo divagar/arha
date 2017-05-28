@@ -12,6 +12,18 @@
 <md-sidenav-container class="arha-container">
 
   <md-sidenav #sidenav class="arha-sidenav" align="end">
+    <div class="arha-user row" *ngIf="(user | async)?.uid">
+      <div class="cell">
+        <img class="photo" src="{{ (user | async)?.photoURL }}">
+      </div>
+      <div class="cell">
+        <span class="name">{{ (user | async)?.displayName }}</span>
+        <a class="sign-out" (click)="logout()">
+          <i class="material-icons">directions_walk</i>&nbsp;Sign out
+        </a>
+      </div>
+    </div>
+
     <md-nav-list (click)="sidenav.toggle()">
       <md-list-item class="arha-sidenav-content" [routerLink]="['/home']">
         <a><i class="material-icons">dashboard</i> &nbsp;Home</a>
@@ -26,7 +38,6 @@
   </md-sidenav>
 
   <div>
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
-
 </md-sidenav-container>
