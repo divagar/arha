@@ -1,3 +1,7 @@
-p {
-    text-align: center;
+.arha-login {
+    display: flex;
+    min-height: 550px;
+    width:100%;
+    justify-content: center;
+    align-items: center;
 }

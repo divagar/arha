@@ -6,10 +6,15 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 30px;
     margin: 0;
+    /*background: url("/assets/arha_bg.png");*/
+    background: #F5F5F6;
 }
 
 .mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content {
     font-family: 'Quicksand', sans-serif !important;
+}
+.mat-sidenav-content {
+    width: 100% !important;
 }
 
 snack-bar-container {
