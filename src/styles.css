@@ -16,6 +16,9 @@ body {
 .mat-sidenav-content {
     width: 100% !important;
 }
+.mat-sidenav-backdrop.mat-sidenav-shown {
+    background-color: rgba(0,0,0,.2);
+}
 
 snack-bar-container {
     background: #673AB7 !important;
