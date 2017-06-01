@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
+import { ArhaauthService } from './providers/arhaauth.service';
 
 @Component({
   selector: 'arha',
@@ -15,8 +16,9 @@ export class ArhaComponent {
   user: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth,
-    public snackBar: MdSnackBar) {
-    this.user = afAuth.authState;
+    public snackBar: MdSnackBar,
+    public authService: ArhaauthService) {
+    this.user = authService.getUserDetails();
   }
 
   ngOnInit() {
@@ -26,9 +28,9 @@ export class ArhaComponent {
     this.afAuth.auth.signOut().then(() => {
       this.openSnackBar("User signed out !", "Ok");
     },
-    error => {
-      this.openSnackBar("Error occured while signing out !", "Ok");
-    }
+      error => {
+        this.openSnackBar("Error occured while signing out !", "Ok");
+      }
     );
 
   }
