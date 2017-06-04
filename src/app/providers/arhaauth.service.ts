@@ -13,7 +13,11 @@ export class ArhaauthService {
   }
 
   gLogin(): firebase.Promise<any> {
-    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/fitness.activity.read');
+    //return this.afAuth.auth.signInWithPopup(provider);
+    this.afAuth.auth.signInWithRedirect(provider);
+    return this.afAuth.auth.getRedirectResult();
   }
 
   gLogout(): firebase.Promise<any> {
@@ -22,6 +26,10 @@ export class ArhaauthService {
 
   getUserDetails() {
     return this.user;
+  }
+
+  gGetFittnessActivity() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
 
