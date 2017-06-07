@@ -16,12 +16,16 @@ export class ArhaauthService {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/fitness.activity.read');
     //return this.afAuth.auth.signInWithPopup(provider);
-    this.afAuth.auth.signInWithRedirect(provider);
-    return this.afAuth.auth.getRedirectResult();
+    return this.afAuth.auth.signInWithRedirect(provider);
+
   }
 
   gLogout(): firebase.Promise<any> {
     return this.afAuth.auth.signOut();
+  }
+
+  getSignInResult(): firebase.Promise<any> {
+    return this.afAuth.auth.getRedirectResult();
   }
 
   getUserDetails() {

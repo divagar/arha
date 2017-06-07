@@ -17,13 +17,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.gLogin().then((data) => {
-      this.arhaComponent.openSnackBar("User signed in !", "Ok");
-      console.log(data);
-    },
-    error => {
-      this.arhaComponent.openSnackBar("Error occured while signing out !", "Ok");
-    }
-    );
+    this.authService.gLogin();
   }
 }
