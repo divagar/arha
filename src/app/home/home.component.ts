@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   getSignInResult() {
     this.authService.getSignInResult().then((data) => {
-      this.arhaComponent.openSnackBar("User signed in !", "Ok");
+      this.arhaComponent.openSnackBar("Signed in !", "Ok");
       console.log(data);
     },
       error => {
