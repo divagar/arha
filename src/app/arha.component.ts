@@ -26,7 +26,7 @@ export class ArhaComponent {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.openSnackBar("User signed out !", "Ok");
+      this.openSnackBar("Signed out !", "Ok");
     },
       error => {
         this.openSnackBar("Error occured while signing out !", "Ok");
