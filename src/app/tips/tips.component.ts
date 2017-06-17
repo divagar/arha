@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-import { ArhaauthService } from '../providers/arhaauth.service';
+import { ArhaAuthService } from '../providers/arhaauth.service';
 
 @Component({
   selector: 'arha-tips',
@@ -13,7 +13,7 @@ export class TipsComponent implements OnInit {
 
   user: Observable<firebase.User>;
 
-  constructor(public authService: ArhaauthService,
+  constructor(public authService: ArhaAuthService,
     public router: Router) {
     this.user = authService.getUserDetails();
     //get af auth status

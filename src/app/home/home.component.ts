@@ -3,7 +3,7 @@ import { ArhaComponent } from '../arha.component';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { ArhaauthService } from '../providers/arhaauth.service';
+import { ArhaAuthService } from '../providers/arhaauth.service';
 
 @Component({
   selector: 'arha-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   user: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth,
-    public authService: ArhaauthService,
+    public authService: ArhaAuthService,
     public arhaComponent: ArhaComponent) {
 
     this.getSignInResult();

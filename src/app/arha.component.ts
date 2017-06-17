@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
-import { ArhaauthService } from './providers/arhaauth.service';
+import { ArhaAuthService } from './providers/arhaauth.service';
 
 @Component({
   selector: 'arha',
@@ -17,7 +17,7 @@ export class ArhaComponent {
 
   constructor(public afAuth: AngularFireAuth,
     public snackBar: MdSnackBar,
-    public authService: ArhaauthService) {
+    public authService: ArhaAuthService) {
     this.user = authService.getUserDetails();
   }
 

@@ -15,7 +15,8 @@ import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
-import { ArhaauthService } from './providers/arhaauth.service';
+import { ArhaAuthService } from './providers/arhaauth.service';
+import { ArhaFitService } from './providers/arhafit.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ArhaauthService } from './providers/arhaauth.service';
   ],
   providers: [
     arhaRoutingProviders,
-    ArhaauthService
+    ArhaAuthService,
+    ArhaFitService
   ],
   bootstrap: [ArhaComponent]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArhaComponent } from '../arha.component';
-import { ArhaauthService } from '../providers/arhaauth.service';
+import { ArhaAuthService } from '../providers/arhaauth.service';
 
 @Component({
   selector: 'arha-login',
@@ -9,7 +9,7 @@ import { ArhaauthService } from '../providers/arhaauth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: ArhaauthService,
+  constructor(public authService: ArhaAuthService,
     public arhaComponent: ArhaComponent) {
   }
 
