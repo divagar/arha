@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { ArhaAuthService } from '../providers/arhaauth.service';
+import { ArhaFitService } from '../providers/arhafit.service';
 
 @Component({
   selector: 'arha-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public afAuth: AngularFireAuth,
     public authService: ArhaAuthService,
+    public fitService: ArhaFitService,
     public arhaComponent: ArhaComponent) {
 
     this.getSignInResult();
@@ -40,6 +42,12 @@ export class HomeComponent implements OnInit {
   getUserDetails() {
     this.user = this.authService.getUserDetails();
     console.log(this.user);
+
+    //get fit data source
+    this.fitService.getDataSource()
+                      .subscribe(
+                       any => console.log(any),
+                       error => console.log(error));
     this.user
       .do(user => console.log(user))
       .subscribe(user => console.log(user));
