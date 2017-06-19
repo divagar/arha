@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   getSignInResult() {
     this.authService.getSignInResult().then((data) => {
       this.arhaComponent.openSnackBar("Signed in !", "Ok");
-      console.log(data);
+      //console.log(data);
     },
       error => {
         this.arhaComponent.openSnackBar("Error occured while signing out !", "Ok");
@@ -41,15 +41,17 @@ export class HomeComponent implements OnInit {
 
   getUserDetails() {
     this.user = this.authService.getUserDetails();
-    console.log(this.user);
 
-    //get fit data source
-    this.fitService.getDataSource()
-                      .subscribe(
-                       any => console.log(any),
-                       error => console.log(error));
     this.user
-      .do(user => console.log(user))
+      .do(user => {
+        console.log(user);
+        console.log(user.refreshToken);
+        //get fit data source
+        this.fitService.getDataSource(user.refreshToken)
+          .subscribe(
+          any => console.log(any),
+          error => console.log(error));
+      })
       .subscribe(user => console.log(user));
   }
 

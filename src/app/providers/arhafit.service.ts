@@ -1,6 +1,6 @@
 
-import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,23 +13,28 @@ export class ArhaFitService {
   private gFitUrl = 'https://www.googleapis.com/fitness/v1/users/me/';
   private gFitResponse = {};
 
-  constructor (private http: Http) {}
+  constructor(private http: Http) { }
 
-  getDataSource(): Observable<any> {
+  getDataSource(token: string): Observable<any> {
     let dataSourceUrl = 'dataSources'
     console.log('I am here @ getDataSource');
-    return this.http.get(this.gFitUrl + dataSourceUrl)
-                    .map(this.extractData)
-                    .catch(this.handleError);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', token);
+    console.log(headers);
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.gFitUrl + dataSourceUrl, options)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);
-    return body.data || { };
+    return body.data || {};
   }
 
-  private handleError (error: Response | any) {
+  private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
