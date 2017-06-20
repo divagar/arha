@@ -18,10 +18,13 @@ export class ArhaFitService {
   getDataSource(token: string): Observable<any> {
     let dataSourceUrl = 'dataSources'
     console.log('I am here @ getDataSource');
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    headers.append('Authorization', token);
-    console.log(headers);
-    let options = new RequestOptions({ headers: headers });
+    let url = 'https://www.googleapis.com/fitness/v1/users/me/';
+    let headers = new Headers({
+                              'Content-Type': 'application/json;encoding=utf-8',
+                              'Authorization': 'Bearer ya29.'+ token });
+    let options = new RequestOptions({
+                                      headers: headers });
+    console.log(options);
 
     return this.http.post(this.gFitUrl + dataSourceUrl, options)
       .map(this.extractData)
