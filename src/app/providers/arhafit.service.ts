@@ -20,10 +20,19 @@ export class ArhaFitService {
     console.log('I am here @ getDataSource');
     let url = 'https://www.googleapis.com/fitness/v1/users/me/';
     let headers = new Headers({
-                              'Content-Type': 'application/json;encoding=utf-8',
-                              'Authorization': 'Bearer ya29.'+ token });
-    let options = new RequestOptions({
-                                      headers: headers });
+      'Content-Type': 'application/json;encoding=utf-8',
+      'Authorization': 'Bearer ya29.' + token
+    });
+    //let options = new RequestOptions({
+    //                                 headers: headers });
+    let options = {
+      "Method": "GET",
+      "absoluteURI": this.gFitUrl + dataSourceUrl,
+      "headers": {},
+      "message-body": "",
+      "access_token": "ya29." + token,
+      "access_token_type": "bearer"
+    }
     console.log(options);
 
     return this.http.post(this.gFitUrl + dataSourceUrl, options)
