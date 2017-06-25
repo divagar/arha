@@ -16,17 +16,15 @@ export class HomeComponent implements OnInit {
 
   auth: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth,
-    public authService: ArhaAuthService,
-    public fitService: ArhaFitService,
-    public arhaComponent: ArhaComponent) {
+  constructor(private afAuth: AngularFireAuth,
+    private authService: ArhaAuthService,
+    private fitService: ArhaFitService,
+    private arhaComponent: ArhaComponent) {
     this.auth = authService.getAuthDetails();
 
     //get af auth status
     this.auth
       .subscribe(result => {
-        if(result)
-          this.arhaComponent.openSnackBar("Signed in !", "Ok");
       });
   }
 

@@ -27,7 +27,8 @@ export class ArhaAuthService {
     this.afAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.credential) {
-
+          //TODO: show a snackbar on successful login.
+          //this.arhaComponent.openSnackBar("Signed in !", "Ok");
         }
       })
       .catch((error) => {

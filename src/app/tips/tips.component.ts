@@ -13,8 +13,8 @@ export class TipsComponent implements OnInit {
 
   auth: Observable<firebase.User>;
 
-  constructor(public authService: ArhaAuthService,
-    public router: Router) {
+  constructor(private authService: ArhaAuthService,
+    private router: Router) {
     this.auth = authService.getAuthDetails();
 
     //get af auth status

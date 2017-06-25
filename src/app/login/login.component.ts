@@ -9,8 +9,8 @@ import { ArhaAuthService } from '../providers/arhaauth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: ArhaAuthService,
-    public arhaComponent: ArhaComponent) {
+  constructor(private authService: ArhaAuthService,
+    private arhaComponent: ArhaComponent) {
   }
 
   ngOnInit() {

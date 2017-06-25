@@ -15,9 +15,9 @@ export class ArhaComponent {
 
   auth: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth,
-    public snackBar: MdSnackBar,
-    public authService: ArhaAuthService) {
+  constructor(private afAuth: AngularFireAuth,
+    private snackBar: MdSnackBar,
+    private authService: ArhaAuthService) {
     this.auth = authService.getAuthDetails();
   }
 
