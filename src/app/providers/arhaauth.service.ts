@@ -6,35 +6,36 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class ArhaAuthService {
 
-  user: Observable<firebase.User>;
+  auth: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+    this.getSignInResult();
+    this.auth = afAuth.authState;
   }
 
   gLogin(): firebase.Promise<any> {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/fitness.activity.read');
-    //return this.afAuth.auth.signInWithPopup(provider);
     return this.afAuth.auth.signInWithRedirect(provider);
-
   }
 
   gLogout(): firebase.Promise<any> {
     return this.afAuth.auth.signOut();
   }
 
-  getSignInResult(): firebase.Promise<any> {
-    return this.afAuth.auth.getRedirectResult();
+  getSignInResult() {
+    this.afAuth.auth.getRedirectResult()
+      .then((result) => {
+        if (result.credential) {
+
+        }
+      })
+      .catch((error) => {
+      })
   }
 
-  getUserDetails() {
-    return this.user;
+  getAuthDetails() {
+    return this.auth;
   }
-
-  gGetFittnessActivity() {
-    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-
 
 }

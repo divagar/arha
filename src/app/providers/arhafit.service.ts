@@ -30,7 +30,7 @@ export class ArhaFitService {
       "absoluteURI": this.gFitUrl + dataSourceUrl,
       "headers": {},
       "message-body": "",
-      "access_token": "ya29." + token,
+      "access_token": token,
       "access_token_type": "bearer"
     }
     console.log(options);

@@ -13,26 +13,25 @@ import { ArhaAuthService } from './providers/arhaauth.service';
 
 export class ArhaComponent {
 
-  user: Observable<firebase.User>;
+  auth: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth,
     public snackBar: MdSnackBar,
     public authService: ArhaAuthService) {
-    this.user = authService.getUserDetails();
+    this.auth = authService.getAuthDetails();
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(() => {
-      this.openSnackBar("Signed out !", "Ok");
-    },
-      error => {
+    this.afAuth.auth.signOut()
+      .then(() => {
+        this.openSnackBar("Signed out !", "Ok");
+      })
+      .catch(() => {
         this.openSnackBar("Error occured while signing out !", "Ok");
-      }
-    );
-
+      });
   }
 
   openSnackBar(message: string, action: string) {

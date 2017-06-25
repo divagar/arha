@@ -14,45 +14,28 @@ import { ArhaFitService } from '../providers/arhafit.service';
 
 export class HomeComponent implements OnInit {
 
-  user: Observable<firebase.User>;
+  auth: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth,
     public authService: ArhaAuthService,
     public fitService: ArhaFitService,
     public arhaComponent: ArhaComponent) {
+    this.auth = authService.getAuthDetails();
 
-    this.getSignInResult();
-    this.getUserDetails();
+    //get af auth status
+    this.auth
+      .subscribe(result => {
+        if(result)
+          this.arhaComponent.openSnackBar("Signed in !", "Ok");
+      });
   }
 
   ngOnInit() {
   }
 
-  getSignInResult() {
-    this.authService.getSignInResult().then((data) => {
-      this.arhaComponent.openSnackBar("Signed in !", "Ok");
-      //console.log(data);
-    },
-      error => {
-        this.arhaComponent.openSnackBar("Error occured while signing out !", "Ok");
-      }
-    );
-  }
-
-  getUserDetails() {
-    this.user = this.authService.getUserDetails();
-
-    this.user
-      .do(user => {
-        console.log(user);
-        console.log(user.refreshToken);
-        //get fit data source
-        this.fitService.getDataSource(user.refreshToken)
-          .subscribe(
-          any => console.log(any),
-          error => console.log(error));
-      })
-      .subscribe(user => console.log(user));
-  }
-
+  // //get fit data source
+  // this.fitService.getDataSource(result.credential.accessToken)
+  //   .subscribe(
+  //   any => console.log(any),
+  //   error => console.log(error));
 }

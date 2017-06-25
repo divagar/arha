@@ -12,12 +12,12 @@
 <md-sidenav-container class="arha-container">
 
   <md-sidenav #sidenav class="arha-sidenav" align="end">
-    <div class="arha-user row" *ngIf="(user | async)?.uid">
+    <div class="arha-user row" *ngIf="(auth | async)?.uid">
       <div class="cell">
-        <img class="photo" src="{{ (user | async)?.photoURL }}">
+        <img class="photo" src="{{ (auth | async)?.photoURL }}">
       </div>
       <div class="cell">
-        <span class="name">{{ (user | async)?.displayName }}</span>
+        <span class="name">{{ (auth | async)?.displayName }}</span>
         <a class="sign-out" (click)="logout()">
           <i class="material-icons">directions_walk</i>&nbsp;Sign out
         </a>
