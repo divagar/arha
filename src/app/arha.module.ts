@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { ArhaAuthService } from './providers/arhaauth.service';
 import { ArhaFitService } from './providers/arhafit.service';
+import { ArhaLocalStorageService } from './providers/arhalocalstorage.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ArhaFitService } from './providers/arhafit.service';
   providers: [
     arhaRoutingProviders,
     ArhaAuthService,
-    ArhaFitService
+    ArhaFitService,
+    ArhaLocalStorageService
   ],
   bootstrap: [ArhaComponent]
 })
