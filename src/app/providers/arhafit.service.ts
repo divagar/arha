@@ -16,26 +16,16 @@ export class ArhaFitService {
   constructor(private http: Http) { }
 
   getDataSource(token: string): Observable<any> {
-    let dataSourceUrl = 'dataSources'
-    console.log('I am here @ getDataSource');
-    let url = 'https://www.googleapis.com/fitness/v1/users/me/';
+    let dataSourceUrl = 'dataSources';
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8',
-      'Authorization': 'Bearer ya29.' + token
+      'Authorization': 'Bearer ' + token
     });
-    //let options = new RequestOptions({
-    //                                 headers: headers });
-    let options = {
-      "Method": "GET",
-      "absoluteURI": this.gFitUrl + dataSourceUrl,
-      "headers": {},
-      "message-body": "",
-      "access_token": token,
-      "access_token_type": "bearer"
-    }
+    let options = new RequestOptions({
+      headers: headers
+    });
     console.log(options);
-
-    return this.http.post(this.gFitUrl + dataSourceUrl, options)
+    return this.http.get(this.gFitUrl + dataSourceUrl, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

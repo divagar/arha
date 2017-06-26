@@ -24,14 +24,11 @@ export class HomeComponent implements OnInit {
     private arhaComponent: ArhaComponent) {
     this.auth = authService.getAuthDetails();
 
-    //get af auth status
+    //Get af auth status
     this.auth
       .subscribe(result => {
-        //get fit data source - WIP
-        this.fitService.getDataSource('')
-          .subscribe(
-          any => console.log(any),
-          error => console.log(error));
+        //Get fit data source.
+        this.getFitDataSource();
       });
   }
 
@@ -39,6 +36,14 @@ export class HomeComponent implements OnInit {
     //TODO: first login Show the snack bar
     /*if(this.arhaLS.retrieve('gJustLoginedIn') == 'true')
       this.arhaComponent.openSnackBar("Signed in !", "Ok");*/
+  }
+
+  getFitDataSource() {
+    var gToken = this.arhaLS.retrieve('gToken');
+    this.fitService.getDataSource(gToken.accessToken)
+      .subscribe(
+      any => console.log(any),
+      error => console.log(error));
   }
 
 }
