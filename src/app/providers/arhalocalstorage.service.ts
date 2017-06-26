@@ -12,7 +12,7 @@ export class ArhaLocalStorageService {
   }
 
   retrieve(key) {
-    let val: string = localStorage.getItem(key);
+    let val =  JSON.parse(localStorage.getItem(key));
     if (!val) throw 'No value found!';
     return val;
   }
