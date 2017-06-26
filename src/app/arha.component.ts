@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
 import { ArhaAuthService } from './providers/arhaauth.service';
+import { ArhaLocalStorageService } from './providers/arhalocalstorage.service';
 
 @Component({
   selector: 'arha',
@@ -17,7 +18,8 @@ export class ArhaComponent {
 
   constructor(private afAuth: AngularFireAuth,
     private snackBar: MdSnackBar,
-    private authService: ArhaAuthService) {
+    private authService: ArhaAuthService,
+    private arhaLS: ArhaLocalStorageService) {
     this.auth = authService.getAuthDetails();
   }
 
@@ -28,6 +30,8 @@ export class ArhaComponent {
     this.afAuth.auth.signOut()
       .then(() => {
         this.openSnackBar("Signed out !", "Ok");
+        this.arhaLS.store('gToken', '');
+        this.arhaLS.store('gJustLoginedIn', '');
       })
       .catch(() => {
         this.openSnackBar("Error occured while signing out !", "Ok");

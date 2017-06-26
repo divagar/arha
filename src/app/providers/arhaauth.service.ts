@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { ArhaLocalStorageService } from './arhalocalstorage.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -8,7 +9,8 @@ export class ArhaAuthService {
 
   auth: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth,
+    private arhaLS: ArhaLocalStorageService) {
     this.getSignInResult();
     this.auth = afAuth.authState;
   }
@@ -27,9 +29,11 @@ export class ArhaAuthService {
     this.afAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.credential) {
-          //TODO: show a snackbar on successful login.
-          //this.arhaComponent.openSnackBar("Signed in !", "Ok");
+          this.arhaLS.store('gToken', result.credential);
+          this.arhaLS.store('gJustLoginedIn', true);
         }
+        else
+          this.arhaLS.store('gJustLoginedIn', false);
       })
       .catch((error) => {
       })

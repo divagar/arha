@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { ArhaAuthService } from '../providers/arhaauth.service';
 import { ArhaFitService } from '../providers/arhafit.service';
+import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
 
 @Component({
   selector: 'arha-home',
@@ -19,21 +20,25 @@ export class HomeComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth,
     private authService: ArhaAuthService,
     private fitService: ArhaFitService,
+    private arhaLS: ArhaLocalStorageService,
     private arhaComponent: ArhaComponent) {
     this.auth = authService.getAuthDetails();
 
     //get af auth status
     this.auth
       .subscribe(result => {
+        //get fit data source - WIP
+        this.fitService.getDataSource('')
+          .subscribe(
+          any => console.log(any),
+          error => console.log(error));
       });
   }
 
   ngOnInit() {
+    //TODO: first login Show the snack bar
+    /*if(this.arhaLS.retrieve('gJustLoginedIn') == 'true')
+      this.arhaComponent.openSnackBar("Signed in !", "Ok");*/
   }
 
-  // //get fit data source
-  // this.fitService.getDataSource(result.credential.accessToken)
-  //   .subscribe(
-  //   any => console.log(any),
-  //   error => console.log(error));
 }
