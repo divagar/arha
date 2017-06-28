@@ -15,6 +15,10 @@ export class ArhaFitService {
 
   constructor(private http: Http) { }
 
+  refreshAccessToken() {
+    //TODO: placeholder
+  }
+
   getDataSource(token: string): Observable<any> {
     let dataSourceUrl = 'dataSources';
     let headers = new Headers({
