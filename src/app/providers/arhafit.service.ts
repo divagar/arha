@@ -15,8 +15,15 @@ export class ArhaFitService {
 
   constructor(private http: Http) { }
 
-  refreshAccessToken() {
-    //TODO: placeholder
+  refreshAccessToken(refreshToken: string) {
+    let url = 'https://developers.google.com/oauthplayground/refreshAccessToken';
+    let options = {
+      'refresh_token' : refreshToken
+    };
+    console.log(options);
+    return this.http.post(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   getDataSource(token: string): Observable<any> {
