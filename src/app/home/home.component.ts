@@ -27,8 +27,15 @@ export class HomeComponent implements OnInit {
     //Get af auth status
     this.auth
       .subscribe(result => {
+
+        //refresh the token
+        this.fitService.refreshAccessToken(result.refreshToken)
+          .subscribe(
+          any => console.log(any),
+          error => console.log(error));
+
         //Get fit data source.
-        this.getFitDataSource();
+        //this.getFitDataSource();
       });
   }
 

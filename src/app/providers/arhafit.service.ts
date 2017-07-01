@@ -17,7 +17,7 @@ export class ArhaFitService {
   constructor(private http: Http,
               private arhaLS: ArhaLocalStorageService) { }
 
-  refreshAccessToken(refreshToken: string) {
+  refreshAccessToken(refreshToken: string): Observable<any> {
     let url = 'https://developers.google.com/oauthplayground/refreshAccessToken';
     let options = {
       'refresh_token' : refreshToken
@@ -38,7 +38,7 @@ export class ArhaFitService {
     let options = new RequestOptions({
       headers: headers
     });
-    console.log(options);
+    //console.log(options);
     return this.http.get(this.gFitUrl + dataSourceUrl, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -47,7 +47,8 @@ export class ArhaFitService {
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);
-    return body.data || {};
+    //return body.data || {};
+    return body || {};
   }
 
   private handleError(error: Response | any) {
