@@ -29,7 +29,7 @@ export class ArhaAuthService {
     this.afAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.credential) {
-          this.arhaLS.store('gToken', result.credential);
+          this.arhaLS.store('gToken', result.credential.accessToken);
           this.arhaLS.store('gJustLoginedIn', true);
         }
         else

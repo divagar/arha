@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
+import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -13,7 +14,8 @@ export class ArhaFitService {
   private gFitUrl = 'https://www.googleapis.com/fitness/v1/users/me/';
   private gFitResponse = {};
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private arhaLS: ArhaLocalStorageService) { }
 
   refreshAccessToken(refreshToken: string) {
     let url = 'https://developers.google.com/oauthplayground/refreshAccessToken';
@@ -26,7 +28,8 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
-  getDataSource(token: string): Observable<any> {
+  getDataSource(): Observable<any> {
+    let token = this.arhaLS.retrieve('gToken');
     let dataSourceUrl = 'dataSources';
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8',

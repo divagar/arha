@@ -39,8 +39,7 @@ export class HomeComponent implements OnInit {
   }
 
   getFitDataSource() {
-    var gToken = this.arhaLS.retrieve('gToken');
-    this.fitService.getDataSource(gToken.accessToken)
+    this.fitService.getDataSource()
       .subscribe(
       any => console.log(any),
       error => console.log(error));
