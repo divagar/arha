@@ -11,15 +11,11 @@ export class ArhaAuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
-    this.getSignInResult();
+
     this.auth = afAuth.authState;
-    // this.afAuth.auth.currentUser.getIdToken(true)
-    // .then((result) => {
-    //   console.log(result);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+
+    //sign in result
+    this.getSignInResult();
   }
 
   gLogin(): firebase.Promise<any> {
