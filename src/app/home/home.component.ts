@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
           error => console.log(error));
 
         //Get fit data source.
-        //this.getFitDataSource();
+        this.getFitDataSource();
       });
   }
 
@@ -48,7 +48,18 @@ export class HomeComponent implements OnInit {
   getFitDataSource() {
     this.fitService.getDataSource()
       .subscribe(
-      any => console.log(any),
+      any => {
+        console.log(any);
+
+        //Get id token
+        /*this.afAuth.auth.currentUser.getIdToken()
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          })*/
+      },
       error => console.log(error));
   }
 
