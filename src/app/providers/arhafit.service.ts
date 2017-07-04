@@ -25,11 +25,12 @@ export class ArhaFitService {
 
   refreshAccessToken(refreshToken: string): Observable<any> {
     let url = 'https://www.googleapis.com/oauth2/v4/token';
-    let options = {
-      'refresh_token': refreshToken
-    };
-    console.log(options);
-    return this.http.post(url, options)
+    let headers = new Headers({
+      'Content-Type': 'application/json;encoding=utf-8'
+    });
+    let data = { 'refresh_token': refreshToken, 'grant_type': 'password'};
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(url, data, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -41,10 +42,7 @@ export class ArhaFitService {
       'Content-Type': 'application/json;encoding=utf-8',
       'Authorization': 'Bearer ' + token
     });
-    let options = new RequestOptions({
-      headers: headers
-    });
-    console.log(options);
+    let options = new RequestOptions({ headers: headers });
     return this.http.get(this.gFitUrl + dataSourceUrl, options)
       .map(this.extractData)
       .catch(this.handleError);
