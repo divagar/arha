@@ -11,14 +11,14 @@ import { ArhaAuthService } from '../providers/arhaauth.service';
 })
 export class TipsComponent implements OnInit {
 
-  auth: Observable<firebase.User>;
+  authState: Observable<firebase.User>;
 
   constructor(private authService: ArhaAuthService,
     private router: Router) {
-    this.auth = authService.getAuthDetails();
+    this.authState = authService.getAuthStateDetails();
 
     //get af auth status
-    this.auth
+    this.authState
       .subscribe(result => this.checkLogin(result))
   }
 
