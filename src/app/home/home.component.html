@@ -1,4 +1,4 @@
-<arha-login class="arha-login" *ngIf="!(auth | async)?.uid"></arha-login>
-<p *ngIf="(auth | async)?.uid">
+<arha-login class="arha-login" *ngIf="!(authState | async)?.uid"></arha-login>
+<p *ngIf="(authState | async)?.uid">
   Home Placeholder
 </p>

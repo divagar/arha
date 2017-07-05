@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import * as firebase from 'firebase/app';
 import { Headers, RequestOptions } from '@angular/http';
-import { ArhaAuthService } from './arhaauth.service';
 import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
 
 import { Observable } from 'rxjs/Observable';
@@ -15,12 +14,9 @@ export class ArhaFitService {
 
   private gFitUrl = 'https://www.googleapis.com/fitness/v1/users/me/';
   private gFitResponse = {};
-  auth: Observable<firebase.User>;
 
   constructor(private http: Http,
-    private authService: ArhaAuthService,
     private arhaLS: ArhaLocalStorageService) {
-    this.auth = authService.getAuthDetails();
   }
 
   refreshAccessToken(refreshToken: string): Observable<any> {
@@ -28,7 +24,7 @@ export class ArhaFitService {
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8'
     });
-    let data = { 'refresh_token': refreshToken, 'grant_type': 'password'};
+    let data = { 'refresh_token': refreshToken, 'grant_type': 'refresh_token'};
     let options = new RequestOptions({ headers: headers });
     return this.http.post(url, data, options)
       .map(this.extractData)

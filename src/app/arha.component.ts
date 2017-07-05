@@ -14,13 +14,13 @@ import { ArhaLocalStorageService } from './providers/arhalocalstorage.service';
 
 export class ArhaComponent {
 
-  auth: Observable<firebase.User>;
+  authState: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth,
     private snackBar: MdSnackBar,
     private authService: ArhaAuthService,
     private arhaLS: ArhaLocalStorageService) {
-    this.auth = authService.getAuthDetails();
+    this.authState = authService.getAuthStateDetails();
   }
 
   ngOnInit() {

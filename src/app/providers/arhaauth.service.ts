@@ -7,12 +7,13 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class ArhaAuthService {
 
-  auth: Observable<firebase.User>;
+  authState: Observable<firebase.User>;
+  authUser: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
 
-    this.auth = afAuth.authState;
+    this.authState = afAuth.authState;
 
     //sign in result
     this.getSignInResult();
@@ -32,6 +33,8 @@ export class ArhaAuthService {
     this.afAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.credential) {
+          //console.log(result);
+          this.authUser = result.user;
           this.arhaLS.store('gToken', result.credential.accessToken);
           this.arhaLS.store('gJustLoginedIn', true);
         }
@@ -42,8 +45,12 @@ export class ArhaAuthService {
       })
   }
 
-  getAuthDetails() {
-    return this.auth;
+  getAuthStateDetails() {
+    return this.authState;
+  }
+
+  getAuthUserDetails() {
+    return this.authUser;
   }
 
 }

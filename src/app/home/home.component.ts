@@ -15,19 +15,20 @@ import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
 
 export class HomeComponent implements OnInit {
 
-  auth: Observable<firebase.User>;
+  authState: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth,
     private authService: ArhaAuthService,
     private fitService: ArhaFitService,
     private arhaLS: ArhaLocalStorageService,
     private arhaComponent: ArhaComponent) {
-    this.auth = authService.getAuthDetails();
+    this.authState = authService.getAuthStateDetails();
 
     //Get af auth status
-    this.auth
+    this.authState
       .subscribe(result => {
         //refresh the token
+        console.log(result);
         if (result != null) {
           this.fitService.refreshAccessToken(result.refreshToken)
             .subscribe(
