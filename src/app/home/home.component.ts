@@ -27,14 +27,10 @@ export class HomeComponent implements OnInit {
     //Get af auth status
     this.authState
       .subscribe(result => {
-        //refresh the token
         console.log(result);
         if (result != null) {
-          this.fitService.refreshAccessToken(result.refreshToken)
-            .subscribe(
-            any => console.log(any),
-            error => console.log(error));
-
+          //refresh the token
+          this.refreshAccessToken(result);
           //Get fit data source.
           this.getFitDataSource();
         }
@@ -47,12 +43,18 @@ export class HomeComponent implements OnInit {
       this.arhaComponent.openSnackBar("Signed in !", "Ok");*/
   }
 
+  refreshAccessToken(result) {
+    this.fitService.refreshAccessToken(result.refreshToken)
+      .subscribe(
+      any => console.log(any),
+      error => console.log(error));
+  }
+
   getFitDataSource() {
     this.fitService.getDataSource()
       .subscribe(
       any => {
         console.log(any);
-
         //Get id token
         /*this.afAuth.auth.currentUser.getIdToken()
           .then((result) => {
