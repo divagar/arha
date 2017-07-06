@@ -24,7 +24,8 @@ export class ArhaFitService {
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8'
     });
-    let data = { 'refresh_token': refreshToken, 'grant_type': 'refresh_token'};
+    //let data = { 'refresh_token': refreshToken, 'grant_type': 'refresh_token'};
+    let data = { 'code': this.arhaLS.retrieve('gIdToken'), 'grant_type': 'authorization_code'};
     let options = new RequestOptions({ headers: headers });
     return this.http.post(url, data, options)
       .map(this.extractData)
@@ -32,7 +33,7 @@ export class ArhaFitService {
   }
 
   getDataSource(): Observable<any> {
-    let token = this.arhaLS.retrieve('gToken');
+    let token = this.arhaLS.retrieve('gAccessToken');
     let dataSourceUrl = 'dataSources';
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8',
@@ -46,7 +47,7 @@ export class ArhaFitService {
 
   private extractData(res: Response) {
     let body = res.json();
-    console.log(body);
+    //console.log(body);
     //return body.data || {};
     return body || {};
   }

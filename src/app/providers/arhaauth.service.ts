@@ -12,9 +12,7 @@ export class ArhaAuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
-
     this.authState = afAuth.authState;
-
     //sign in result
     this.getSignInResult();
   }
@@ -35,7 +33,8 @@ export class ArhaAuthService {
         if (result.credential) {
           //console.log(result);
           this.authUser = result.user;
-          this.arhaLS.store('gToken', result.credential.accessToken);
+          this.arhaLS.store('gAccessToken', result.credential.accessToken);
+          this.arhaLS.store('gIdToken', result.credential.idToken);
           this.arhaLS.store('gJustLoginedIn', true);
         }
         else
