@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
           //refresh the token
           this.refreshAccessToken(result);
           //Get fit data source.
-          this.getFitDataSource();
+          //this.getFitDataSource();
         }
       });
   }
@@ -44,9 +44,14 @@ export class HomeComponent implements OnInit {
   }
 
   refreshAccessToken(result) {
-    this.fitService.refreshAccessToken(result.refreshToken)
+    this.fitService.refreshAccessToken(result.m, result.refreshToken)
       .subscribe(
-      any => console.log(any),
+      any => {
+        console.log(any);
+        this.arhaLS.store('gAccessToken', 'ya29.' + any.access_token);
+        //Get fit data source.
+        this.getFitDataSource();
+      },
       error => console.log(error));
   }
 
