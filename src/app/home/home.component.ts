@@ -27,10 +27,14 @@ export class HomeComponent implements OnInit {
     //Get af auth status
     this.authState
       .subscribe(result => {
-        console.log(result);
+        //console.log(result);
         if (result != null) {
+          //showLoginSnackBar
+          this.showLoginSnackBar();
+
           //refresh the token
           this.refreshAccessToken(result);
+
           //Get fit data source.
           //this.getFitDataSource();
         }
@@ -38,9 +42,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO: first login Show the snack bar
-    /*if(this.arhaLS.retrieve('gJustLoginedIn') == 'true')
-      this.arhaComponent.openSnackBar("Signed in !", "Ok");*/
   }
 
   refreshAccessToken(result) {
@@ -70,6 +71,14 @@ export class HomeComponent implements OnInit {
           })*/
       },
       error => console.log(error));
+  }
+
+
+  showLoginSnackBar() {
+    if (this.arhaLS.retrieve('gJustLoginedIn') == true) {
+      this.arhaComponent.openSnackBar("Signed in !", "Ok");
+      this.arhaLS.store('gJustLoginedIn', false);
+    }
   }
 
 }

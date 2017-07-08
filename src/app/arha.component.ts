@@ -30,7 +30,8 @@ export class ArhaComponent {
     this.afAuth.auth.signOut()
       .then(() => {
         this.openSnackBar("Signed out !", "Ok");
-        this.arhaLS.store('gToken', '');
+        this.arhaLS.store('gAccessToken', '');
+        this.arhaLS.store('gIdToken', '');
         this.arhaLS.store('gJustLoginedIn', '');
       })
       .catch(() => {
