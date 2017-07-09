@@ -33,10 +33,10 @@ export class HomeComponent implements OnInit {
           this.showLoginSnackBar();
 
           //refresh the token
-          this.refreshAccessToken(result);
+          //this.refreshAccessToken(result);
 
           //Get fit data source.
-          //this.getFitDataSource();
+          this.getFitDataSource();
         }
       });
   }
@@ -49,9 +49,9 @@ export class HomeComponent implements OnInit {
       .subscribe(
       any => {
         console.log(any);
-        this.arhaLS.store('gAccessToken', 'ya29.' + any.access_token);
+        //this.arhaLS.store('gAccessToken', 'ya29.' + any.access_token);
         //Get fit data source.
-        this.getFitDataSource();
+        //this.getFitDataSource();
       },
       error => console.log(error));
   }

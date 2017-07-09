@@ -36,6 +36,13 @@ export class ArhaAuthService {
           this.arhaLS.store('gAccessToken', result.credential.accessToken);
           this.arhaLS.store('gIdToken', result.credential.idToken);
           this.arhaLS.store('gJustLoginedIn', true);
+          //test code
+          /*var credential = firebase.auth.GoogleAuthProvider.credential(
+            result.credential.idToken);
+          console.log(credential);
+          firebase.auth().signInWithCredential(credential).then(function (user) {
+            console.log(user);
+          });*/
         }
         else
           this.arhaLS.store('gJustLoginedIn', false);
