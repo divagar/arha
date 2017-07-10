@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ArhaLocalStorageService } from './arhalocalstorage.service';
+import { ArhaLocalStorageService } from './arha.localstorage.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -31,7 +31,7 @@ export class ArhaAuthService {
     this.afAuth.auth.getRedirectResult()
       .then((result) => {
         if (result.credential) {
-          //console.log(result);
+          console.log(result);
           this.authUser = result.user;
           this.arhaLS.store('gAccessToken', result.credential.accessToken);
           this.arhaLS.store('gIdToken', result.credential.idToken);

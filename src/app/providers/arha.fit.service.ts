@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import * as firebase from 'firebase/app';
 import { Headers, RequestOptions } from '@angular/http';
-import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
+import { ArhaLocalStorageService } from '../providers/arha.localstorage.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
