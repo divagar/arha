@@ -15,9 +15,9 @@ import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
-import { ArhaAuthService } from './providers/arhaauth.service';
-import { ArhaFitService } from './providers/arhafit.service';
-import { ArhaLocalStorageService } from './providers/arhalocalstorage.service';
+import { ArhaAuthService } from './providers/arha.auth.service';
+import { ArhaFitService } from './providers/arha.fit.service';
+import { ArhaLocalStorageService } from './providers/arha.localstorage.service';
 
 @NgModule({
   declarations: [

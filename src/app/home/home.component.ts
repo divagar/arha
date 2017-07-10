@@ -3,9 +3,9 @@ import { ArhaComponent } from '../arha.component';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { ArhaAuthService } from '../providers/arhaauth.service';
-import { ArhaFitService } from '../providers/arhafit.service';
-import { ArhaLocalStorageService } from '../providers/arhalocalstorage.service';
+import { ArhaAuthService } from '../providers/arha.auth.service';
+import { ArhaFitService } from '../providers/arha.fit.service';
+import { ArhaLocalStorageService } from '../providers/arha.localstorage.service';
 
 @Component({
   selector: 'arha-home',

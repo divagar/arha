@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-import { ArhaAuthService } from '../providers/arhaauth.service';
+import { ArhaAuthService } from '../providers/arha.auth.service';
 
 @Component({
   selector: 'arha-tips',

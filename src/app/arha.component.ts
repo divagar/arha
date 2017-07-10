@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { MdSnackBar } from '@angular/material';
-import { ArhaAuthService } from './providers/arhaauth.service';
-import { ArhaLocalStorageService } from './providers/arhalocalstorage.service';
+import { ArhaAuthService } from './providers/arha.auth.service';
+import { ArhaLocalStorageService } from './providers/arha.localstorage.service';
 
 @Component({
   selector: 'arha',
