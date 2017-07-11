@@ -14,5 +14,12 @@ export const environment = {
     projectId: arhaConfig.firebase.projectId,
     storageBucket: arhaConfig.firebase.storageBucket,
     messagingSenderId: arhaConfig.firebase.messagingSenderId
+  },
+  gapi: {
+    client_id: arhaConfig.gapi.client_id,
+    project_id: arhaConfig.gapi.project_id,
+    auth_uri: arhaConfig.gapi.auth_uri,
+    token_uri: arhaConfig.gapi.token_uri,
+    auth_provider_x509_cert_url: arhaConfig.gapi.auth_provider_x509_cert_url
   }
 };
