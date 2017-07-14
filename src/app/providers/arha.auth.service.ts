@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 import { ArhaLocalStorageService } from './arha.localstorage.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+declare const gapi: any;
 
 @Injectable()
 export class ArhaAuthService {
@@ -13,11 +16,63 @@ export class ArhaAuthService {
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
     this.authState = afAuth.authState;
+
+    //gapi init
+    this.initGapi();
+
     //sign in result
-    this.getSignInResult();
+    //this.getSignInResult();
   }
 
-  gLogin(): firebase.Promise<any> {
+  initGapi() {
+    this.loadGapi().then(() => {
+      var auth2Args = {
+        fetch_basic_profile: true,
+        client_id: environment.gapi.client_id,
+        scope: 'https://www.googleapis.com/auth/fitness.activity.read'
+      }
+      gapi.auth2.init(auth2Args).then(() => {
+        this.listenGapi();
+      });
+    });
+  }
+
+  loadGapi(): Promise<any> {
+    console.log("load");
+    return new Promise(resolve => {
+      gapi.load('client:auth2', resolve);
+    });
+  }
+
+  listenGapi() {
+    console.log("listen");
+    // Listen for sign-in state changes.
+    var gAuth = gapi.auth2.getAuthInstance();
+    gAuth.isSignedIn.listen(this.updateSigninStatus);
+    // Handle the initial sign-in state.
+    this.updateSigninStatus(gAuth.isSignedIn.get());
+  }
+
+  updateSigninStatus(isSignedIn) {
+    console.log("updateSigninStatus....", isSignedIn);
+    if (isSignedIn) {
+      console.log('User signed in.');
+    };
+  }
+
+  gLogin() {
+    gapi.auth2.getAuthInstance().signIn();
+    console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
+  }
+
+  gLogout() {
+    var gAuth = gapi.auth2.getAuthInstance();
+    gAuth.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+  /*gLogin(): firebase.Promise<any> {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/fitness.activity.read');
     return this.afAuth.auth.signInWithRedirect(provider);
@@ -25,7 +80,7 @@ export class ArhaAuthService {
 
   gLogout(): firebase.Promise<any> {
     return this.afAuth.auth.signOut();
-  }
+  }*/
 
   getSignInResult() {
     this.afAuth.auth.getRedirectResult()
