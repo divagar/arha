@@ -60,9 +60,25 @@ export class ArhaAuthService {
     };
   }
 
+  gFirebaseSignin(idToken) {
+    var credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+    console.log(credential);
+    firebase.auth().signInWithCredential(credential).then(function (user) {
+      console.log(user);
+    });
+  }
+
   gLogin() {
     gapi.auth2.getAuthInstance().signIn();
-    console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true));
+    var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
+    this.arhaLS.store('gAccessToken', authResult.access_token);
+    this.arhaLS.store('gIdToken', authResult.id_token);
+    this.arhaLS.store('gExpiresIn', authResult.expires_in);
+    this.arhaLS.store('gExpiresAt', authResult.expires_at);
+    this.arhaLS.store('gJustLoginedIn', true);
+
+    //firebase sign in
+    this.gFirebaseSignin(authResult.id_token);
   }
 
   gLogout() {
@@ -91,13 +107,6 @@ export class ArhaAuthService {
           this.arhaLS.store('gAccessToken', result.credential.accessToken);
           this.arhaLS.store('gIdToken', result.credential.idToken);
           this.arhaLS.store('gJustLoginedIn', true);
-          //test code
-          /*var credential = firebase.auth.GoogleAuthProvider.credential(
-            result.credential.idToken);
-          console.log(credential);
-          firebase.auth().signInWithCredential(credential).then(function (user) {
-            console.log(user);
-          });*/
         }
         else
           this.arhaLS.store('gJustLoginedIn', false);
