@@ -20,7 +20,7 @@ export class ArhaAuthService {
     //gapi init
     this.initGapi();
 
-    //sign in result
+    //firebase sign in result
     //this.getSignInResult();
   }
 
@@ -38,14 +38,12 @@ export class ArhaAuthService {
   }
 
   loadGapi(): Promise<any> {
-    console.log("load");
     return new Promise(resolve => {
       gapi.load('client:auth2', resolve);
     });
   }
 
   listenGapi() {
-    console.log("listen");
     // Listen for sign-in state changes.
     var gAuth = gapi.auth2.getAuthInstance();
     gAuth.isSignedIn.listen(this.updateSigninStatus);
@@ -54,31 +52,17 @@ export class ArhaAuthService {
   }
 
   updateSigninStatus(isSignedIn) {
-    console.log("updateSigninStatus....", isSignedIn);
     if (isSignedIn) {
       console.log('User signed in.');
+      //check and refresh gapi token
+      this.gRefreshIdToken();
     };
-  }
-
-  gFirebaseSignin(idToken) {
-    var credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-    console.log(credential);
-    firebase.auth().signInWithCredential(credential).then(function (user) {
-      console.log(user);
-    });
   }
 
   gLogin() {
     gapi.auth2.getAuthInstance().signIn();
-    var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
-    this.arhaLS.store('gAccessToken', authResult.access_token);
-    this.arhaLS.store('gIdToken', authResult.id_token);
-    this.arhaLS.store('gExpiresIn', authResult.expires_in);
-    this.arhaLS.store('gExpiresAt', authResult.expires_at);
-    this.arhaLS.store('gJustLoginedIn', true);
-
-    //firebase sign in
-    this.gFirebaseSignin(authResult.id_token);
+    //firebase sign in - just call once and firebase session never expires.
+    this.gFirebaseSignin();
   }
 
   gLogout() {
@@ -86,6 +70,39 @@ export class ArhaAuthService {
     gAuth.signOut().then(function () {
       console.log('User signed out.');
     });
+  }
+
+  gRefreshIdToken() {
+    var expiresAt = this.arhaLS.retrieve('gExpiresAt');
+    var now = Date.now();
+    if (now >= expiresAt) {
+      gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
+      //firebase sign in - just call once and firebase session never expires.
+      this.gFirebaseSignin();
+    }
+  }
+
+  gFirebaseSignin() {
+    var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
+    this.arhaLS.store('gAccessToken', authResult.access_token);
+    this.arhaLS.store('gIdToken', authResult.id_token);
+    this.arhaLS.store('gExpiresIn', authResult.expires_in);
+    this.arhaLS.store('gExpiresAt', authResult.expires_at);
+    this.arhaLS.store('gJustLoginedIn', true);
+
+    var credential = firebase.auth.GoogleAuthProvider.credential(authResult.id_token);
+    //console.log(credential);
+    firebase.auth().signInWithCredential(credential).then(function (user) {
+      //console.log(user);
+    });
+  }
+
+  getAuthStateDetails() {
+    return this.authState;
+  }
+
+  getAuthUserDetails() {
+    return this.authUser;
   }
 
   /*gLogin(): firebase.Promise<any> {
@@ -96,7 +113,7 @@ export class ArhaAuthService {
 
   gLogout(): firebase.Promise<any> {
     return this.afAuth.auth.signOut();
-  }*/
+  }
 
   getSignInResult() {
     this.afAuth.auth.getRedirectResult()
@@ -113,14 +130,5 @@ export class ArhaAuthService {
       })
       .catch((error) => {
       })
-  }
-
-  getAuthStateDetails() {
-    return this.authState;
-  }
-
-  getAuthUserDetails() {
-    return this.authUser;
-  }
-
+  }*/
 }
