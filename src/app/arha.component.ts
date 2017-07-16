@@ -32,6 +32,8 @@ export class ArhaComponent {
         this.openSnackBar("Signed out !", "Ok");
         this.arhaLS.store('gAccessToken', '');
         this.arhaLS.store('gIdToken', '');
+        this.arhaLS.store('gExpiresIn', '');
+        this.arhaLS.store('gExpiresAt', '');
         this.arhaLS.store('gJustLoginedIn', '');
       })
       .catch(() => {
