@@ -27,13 +27,11 @@ export class HomeComponent implements OnInit {
     //Get af auth status
     this.authState
       .subscribe(result => {
-        //console.log(result);
+
         if (result != null) {
+
           //showLoginSnackBar
           this.showLoginSnackBar();
-
-          //refresh the token
-          //this.refreshAccessToken(result);
 
           //Get fit data source.
           this.getFitDataSource();
@@ -44,31 +42,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  refreshAccessToken(result) {
-    this.fitService.refreshAccessToken(result.m, result.refreshToken)
-      .subscribe(
-      any => {
-        console.log(any);
-        //this.arhaLS.store('gAccessToken', 'ya29.' + any.access_token);
-        //Get fit data source.
-        //this.getFitDataSource();
-      },
-      error => console.log(error));
-  }
-
   getFitDataSource() {
     this.fitService.getDataSource()
       .subscribe(
       any => {
         console.log(any);
-        //Get id token
-        /*this.afAuth.auth.currentUser.getIdToken()
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((error) => {
-            console.log(error);
-          })*/
       },
       error => console.log(error));
   }
