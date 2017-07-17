@@ -27,14 +27,9 @@ export class ArhaComponent {
   }
 
   logout() {
-    this.afAuth.auth.signOut()
+    this.authService.gLogout()
       .then(() => {
         this.openSnackBar("Signed out !", "Ok");
-        this.arhaLS.store('gAccessToken', '');
-        this.arhaLS.store('gIdToken', '');
-        this.arhaLS.store('gExpiresIn', '');
-        this.arhaLS.store('gExpiresAt', '');
-        this.arhaLS.store('gJustLoginedIn', '');
       })
       .catch(() => {
         this.openSnackBar("Error occured while signing out !", "Ok");

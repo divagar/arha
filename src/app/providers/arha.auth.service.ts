@@ -65,11 +65,18 @@ export class ArhaAuthService {
     this.gFirebaseSignin();
   }
 
-  gLogout() {
+  gLogout(): firebase.Promise<any> {
     var gAuth = gapi.auth2.getAuthInstance();
+    var that = this;
     gAuth.signOut().then(function () {
       console.log('User signed out.');
+      that.arhaLS.store('gAccessToken', '');
+      that.arhaLS.store('gIdToken', '');
+      that.arhaLS.store('gExpiresIn', '');
+      that.arhaLS.store('gExpiresAt', '');
+      that.arhaLS.store('gJustLoginedIn', '');
     });
+    return this.afAuth.auth.signOut();
   }
 
   gRefreshIdToken() {
@@ -83,18 +90,23 @@ export class ArhaAuthService {
   }
 
   gFirebaseSignin() {
-    var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
-    this.arhaLS.store('gAccessToken', authResult.access_token);
-    this.arhaLS.store('gIdToken', authResult.id_token);
-    this.arhaLS.store('gExpiresIn', authResult.expires_in);
-    this.arhaLS.store('gExpiresAt', authResult.expires_at);
-    this.arhaLS.store('gJustLoginedIn', true);
+    gapi.auth2.getAuthInstance().signIn()
+      .then(function () {
+        var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
+        this.arhaLS.store('gAccessToken', authResult.access_token);
+        this.arhaLS.store('gIdToken', authResult.id_token);
+        this.arhaLS.store('gExpiresIn', authResult.expires_in);
+        this.arhaLS.store('gExpiresAt', authResult.expires_at);
+        this.arhaLS.store('gJustLoginedIn', true);
 
-    var credential = firebase.auth.GoogleAuthProvider.credential(authResult.id_token);
-    //console.log(credential);
-    firebase.auth().signInWithCredential(credential).then(function (user) {
-      //console.log(user);
-    });
+        var credential = firebase.auth.GoogleAuthProvider.credential(authResult.id_token);
+        //console.log(credential);
+        firebase.auth().signInWithCredential(credential).then(function (user) {
+          //console.log(user);
+        });
+      }, function (e) {
+        console.log(e);
+      });
   }
 
   getAuthStateDetails() {
