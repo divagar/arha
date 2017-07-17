@@ -15,13 +15,11 @@ export class ArhaAuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
+
     this.authState = afAuth.authState;
 
     //gapi init
     this.initGapi();
-
-    //firebase sign in result
-    //this.getSignInResult();
   }
 
   initGapi() {
@@ -33,6 +31,8 @@ export class ArhaAuthService {
       }
       gapi.auth2.init(auth2Args).then(() => {
         this.listenGapi();
+        //gapi refresh token
+        this.gRefreshIdToken();
       });
     });
   }
@@ -48,21 +48,25 @@ export class ArhaAuthService {
     var gAuth = gapi.auth2.getAuthInstance();
     gAuth.isSignedIn.listen(this.updateSigninStatus);
     // Handle the initial sign-in state.
-    this.updateSigninStatus(gAuth.isSignedIn.get());
+    //this.updateSigninStatus(gAuth.isSignedIn.get());
   }
 
   updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
+    if (isSignedIn)
       console.log('User signed in.');
-      //check and refresh gapi token
-      this.gRefreshIdToken();
-    };
+    else
+      console.log('User not signed in.');
   }
 
   gLogin() {
-    gapi.auth2.getAuthInstance().signIn();
-    //firebase sign in - just call once and firebase session never expires.
-    this.gFirebaseSignin();
+    var that = this;
+    gapi.auth2.getAuthInstance().signIn()
+      .then(function () {
+        //firebase sign in - just call once and firebase session never expires.
+        that.gFirebaseSignin();
+      }, function (e) {
+        console.log(e);
+      });
   }
 
   gLogout(): firebase.Promise<any> {
@@ -82,7 +86,8 @@ export class ArhaAuthService {
   gRefreshIdToken() {
     var expiresAt = this.arhaLS.retrieve('gExpiresAt');
     var now = Date.now();
-    if (now >= expiresAt) {
+    //check the token is expired and user is signed in
+    if (now >= expiresAt && gapi.auth2.getAuthInstance().isSignedIn.get()) {
       gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse();
       //firebase sign in - just call once and firebase session never expires.
       this.gFirebaseSignin();
@@ -90,23 +95,18 @@ export class ArhaAuthService {
   }
 
   gFirebaseSignin() {
-    gapi.auth2.getAuthInstance().signIn()
-      .then(function () {
-        var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
-        this.arhaLS.store('gAccessToken', authResult.access_token);
-        this.arhaLS.store('gIdToken', authResult.id_token);
-        this.arhaLS.store('gExpiresIn', authResult.expires_in);
-        this.arhaLS.store('gExpiresAt', authResult.expires_at);
-        this.arhaLS.store('gJustLoginedIn', true);
+    var authResult = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true);
+    this.arhaLS.store('gAccessToken', authResult.access_token);
+    this.arhaLS.store('gIdToken', authResult.id_token);
+    this.arhaLS.store('gExpiresIn', authResult.expires_in);
+    this.arhaLS.store('gExpiresAt', authResult.expires_at);
+    this.arhaLS.store('gJustLoginedIn', true);
 
-        var credential = firebase.auth.GoogleAuthProvider.credential(authResult.id_token);
-        //console.log(credential);
-        firebase.auth().signInWithCredential(credential).then(function (user) {
-          //console.log(user);
-        });
-      }, function (e) {
-        console.log(e);
-      });
+    var credential = firebase.auth.GoogleAuthProvider.credential(authResult.id_token);
+    //console.log(credential);
+    firebase.auth().signInWithCredential(credential).then(function (user) {
+      //console.log(user);
+    });
   }
 
   getAuthStateDetails() {
