@@ -15,7 +15,6 @@ export class ArhaAuthService {
 
   constructor(public afAuth: AngularFireAuth,
     private arhaLS: ArhaLocalStorageService) {
-
     this.authState = afAuth.authState;
 
     //gapi init

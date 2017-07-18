@@ -19,29 +19,6 @@ export class ArhaFitService {
     private arhaLS: ArhaLocalStorageService) {
   }
 
-  refreshAccessToken(apiKey: string, refreshToken: string): Observable<any> {
-    // let url = 'https://www.googleapis.com/oauth2/v4/token';
-    // let headers = new Headers({
-    //   'Content-Type': 'application/json;encoding=utf-8'
-    // });
-    // //let data = { 'refresh_token': refreshToken, 'grant_type': 'refresh_token'};
-    // let data = { 'code': this.arhaLS.retrieve('gIdToken'), 'grant_type': 'authorization_code'};
-    // let options = new RequestOptions({ headers: headers });
-    // return this.http.post(url, data, options)
-    //   .map(this.extractData)
-    //   .catch(this.handleError);
-    let url = 'https://securetoken.googleapis.com/v1/token?key='+ apiKey;
-    let headers = new Headers({
-      'Content-Type': 'application/json;encoding=utf-8'
-    });
-    let data = { 'refresh_token': refreshToken, 'grant_type': 'refresh_token'};
-    //let data = { 'code': this.arhaLS.retrieve('gIdToken'), 'grant_type': 'authorization_code' };
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(url, data, options)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
   getDataSource(): Observable<any> {
     let token = this.arhaLS.retrieve('gAccessToken');
     let dataSourceUrl = 'dataSources';
