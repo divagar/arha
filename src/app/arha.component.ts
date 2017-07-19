@@ -30,6 +30,8 @@ export class ArhaComponent {
     this.authService.gLogout()
       .then(() => {
         this.openSnackBar("Signed out !", "Ok");
+        //TODO: find a way to toggle sidnav
+        //sidenav.toggle()
       })
       .catch(() => {
         this.openSnackBar("Error occured while signing out !", "Ok");
