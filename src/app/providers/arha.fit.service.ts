@@ -20,16 +20,40 @@ export class ArhaFitService {
   }
 
   getDataSource(): Observable<any> {
-    let token = this.arhaLS.retrieve('gAccessToken');
     let dataSourceUrl = 'dataSources';
+    return this.http.get(this.gFitUrl + dataSourceUrl, this.getOptions())
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  // getDailyStepTotal(): Observable<any> {
+  //   let dailyStepUrl = 'dataset:aggregate';
+  //   let dailyStepOptions = {
+  //     "aggregateBy": [{
+  //       "dataTypeName": "com.google.step_count.delta",
+  //       "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
+  //     }],
+  //     "bucketByTime": { "durationMillis": 86400000 },
+  //     "startTimeMillis": 1438705622000,
+  //     "endTimeMillis": 1439310422000
+  //   }
+  //   return this.http.get(this.gFitUrl + dailyStepUrl, this.getOptions())
+  //     .map(this.extractData)
+  //     .catch(this.handleError);
+  // }
+
+  getHeader() {
+    let token = this.arhaLS.retrieve('gAccessToken');
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8',
       'Authorization': 'Bearer ' + token
     });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.gFitUrl + dataSourceUrl, options)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return headers;
+  }
+
+  getOptions() {
+    let options = new RequestOptions({ headers: this.getHeader() });
+    return options;
   }
 
   private extractData(res: Response) {
