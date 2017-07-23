@@ -33,8 +33,11 @@ export class HomeComponent implements OnInit {
           //showLoginSnackBar
           this.showLoginSnackBar();
 
-          //Get fit data source.
+          //Get fit data source
           this.getFitDataSource();
+
+          //Get daily step total
+          this.getDailyStepTotal();
         }
       });
   }
@@ -44,6 +47,15 @@ export class HomeComponent implements OnInit {
 
   getFitDataSource() {
     this.fitService.getDataSource()
+      .subscribe(
+      any => {
+        console.log(any);
+      },
+      error => console.log(error));
+  }
+
+  getDailyStepTotal() {
+    this.fitService.getDailyStepTotal()
       .subscribe(
       any => {
         console.log(any);

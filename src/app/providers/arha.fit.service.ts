@@ -21,38 +21,51 @@ export class ArhaFitService {
 
   getDataSource(): Observable<any> {
     let dataSourceUrl = 'dataSources';
+
     return this.http.get(this.gFitUrl + dataSourceUrl, this.getOptions())
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  // getDailyStepTotal(): Observable<any> {
-  //   let dailyStepUrl = 'dataset:aggregate';
-  //   let dailyStepOptions = {
-  //     "aggregateBy": [{
-  //       "dataTypeName": "com.google.step_count.delta",
-  //       "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
-  //     }],
-  //     "bucketByTime": { "durationMillis": 86400000 },
-  //     "startTimeMillis": 1438705622000,
-  //     "endTimeMillis": 1439310422000
-  //   }
-  //   return this.http.get(this.gFitUrl + dailyStepUrl, this.getOptions())
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
+  getDailyStepTotal(): Observable<any> {
+    let dailyStepUrl = 'dataset:aggregate';
+    let startDate = new Date();
+    let endDate = new Date();
+
+    let dailyStepOptions = {
+      "aggregateBy": [{
+        "dataTypeName": "com.google.step_count.delta",
+        "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
+      }],
+      "bucketByTime": { "durationMillis": 86400000 },
+      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
+      "endTimeMillis": endDate.setHours(23,59,0,0)
+    }
+
+    return this.http.get(this.gFitUrl + dailyStepUrl, this.getOptionsWithBody(dailyStepOptions))
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   getHeader() {
     let token = this.arhaLS.retrieve('gAccessToken');
+
     let headers = new Headers({
       'Content-Type': 'application/json;encoding=utf-8',
       'Authorization': 'Bearer ' + token
     });
+
     return headers;
   }
 
   getOptions() {
     let options = new RequestOptions({ headers: this.getHeader() });
+
+    return options;
+  }
+  getOptionsWithBody(body) {
+    let options = new RequestOptions({ method: 'POST', headers: this.getHeader(), body: body });
+
     return options;
   }
 
