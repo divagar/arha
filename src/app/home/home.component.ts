@@ -27,9 +27,7 @@ export class HomeComponent implements OnInit {
     //Get af auth status
     this.authState
       .subscribe(result => {
-
         if (result != null) {
-
           //showLoginSnackBar
           this.showLoginSnackBar();
 
@@ -48,18 +46,14 @@ export class HomeComponent implements OnInit {
   getFitDataSource() {
     this.fitService.getDataSource()
       .subscribe(
-      any => {
-        console.log(any);
-      },
+      any => console.log(any),
       error => console.log(error));
   }
 
   getDailyStepTotal() {
     this.fitService.getDailyStepTotal()
       .subscribe(
-      any => {
-        console.log(any);
-      },
+      any => console.log(any),
       error => console.log(error));
   }
 
