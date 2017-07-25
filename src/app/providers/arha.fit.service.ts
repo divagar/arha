@@ -27,6 +27,26 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
+  getDailyDistanceTotal(): Observable<any> {
+    let dailyDistanceUrl = 'dataset:aggregate';
+    let startDate = new Date();
+    let endDate = new Date();
+
+    let dailyDistanceOptions = {
+      "aggregateBy": [{
+        "dataTypeName": "com.google.distance.delta",
+        "dataSourceId": "derived:com.google.distance.delta:com.google.android.gms:pruned_distance"
+      }],
+      "bucketByTime": { "durationMillis": 86400000 },
+      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
+      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
+    }
+
+    return this.http.get(this.gFitUrl + dailyDistanceUrl, this.getOptionsWithBody(dailyDistanceOptions))
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getDailyStepTotal(): Observable<any> {
     let dailyStepUrl = 'dataset:aggregate';
     let startDate = new Date();
@@ -39,13 +59,14 @@ export class ArhaFitService {
       }],
       "bucketByTime": { "durationMillis": 86400000 },
       "startTimeMillis": startDate.setHours(0, 0, 0, 0),
-      "endTimeMillis": endDate.setHours(23,59,0,0)
+      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
     }
 
     return this.http.get(this.gFitUrl + dailyStepUrl, this.getOptionsWithBody(dailyStepOptions))
       .map(this.extractData)
       .catch(this.handleError);
   }
+
 
   getHeader() {
     let token = this.arhaLS.retrieve('gAccessToken');
