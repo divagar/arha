@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
 
           //Get daily step total
           this.getDailyStepTotal();
+
+          //Get daily step total
+          this.getDailyDistanceTotal();
         }
       });
   }
@@ -52,6 +55,13 @@ export class HomeComponent implements OnInit {
 
   getDailyStepTotal() {
     this.fitService.getDailyStepTotal()
+      .subscribe(
+      any => console.log(any),
+      error => console.log(error));
+  }
+
+  getDailyDistanceTotal() {
+    this.fitService.getDailyDistanceTotal()
       .subscribe(
       any => console.log(any),
       error => console.log(error));
