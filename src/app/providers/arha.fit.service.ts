@@ -67,6 +67,26 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
+  getActivitySegmentTotal(): Observable<any> {
+    let dailyStepUrl = 'dataset:aggregate';
+    let startDate = new Date();
+    let endDate = new Date();
+
+    let dailyStepOptions = {
+      "aggregateBy": [{
+        "dataTypeName": "com.google.activity.segment",
+        "dataSourceId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments"
+      }],
+      "bucketByTime": { "durationMillis": 86400000 },
+      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
+      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
+    }
+
+    return this.http.get(this.gFitUrl + dailyStepUrl, this.getOptionsWithBody(dailyStepOptions))
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 
   getHeader() {
     let token = this.arhaLS.retrieve('gAccessToken');
