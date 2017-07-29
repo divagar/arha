@@ -42,6 +42,9 @@ export class HomeComponent implements OnInit {
 
           //not sure?
           this.getActivitySegmentTotal();
+
+          //calories
+          this.getCaloriesTotal();
         }
       });
   }
@@ -72,6 +75,13 @@ export class HomeComponent implements OnInit {
 
   getActivitySegmentTotal() {
     this.fitService.getActivitySegmentTotal()
+      .subscribe(
+      any => console.log(any),
+      error => console.log(error));
+  }
+
+  getCaloriesTotal() {
+    this.fitService.getCaloriesTotal()
       .subscribe(
       any => console.log(any),
       error => console.log(error));
