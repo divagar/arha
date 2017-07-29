@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit {
 
           //Get daily step total
           this.getDailyDistanceTotal();
+
+          //not sure?
+          this.getActivitySegmentTotal();
         }
       });
   }
@@ -67,6 +70,12 @@ export class HomeComponent implements OnInit {
       error => console.log(error));
   }
 
+  getActivitySegmentTotal() {
+    this.fitService.getActivitySegmentTotal()
+      .subscribe(
+      any => console.log(any),
+      error => console.log(error));
+  }
 
   showLoginSnackBar() {
     if (this.arhaLS.retrieve('gJustLoginedIn') == true) {

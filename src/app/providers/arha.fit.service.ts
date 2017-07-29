@@ -35,7 +35,7 @@ export class ArhaFitService {
     let dailyDistanceOptions = {
       "aggregateBy": [{
         "dataTypeName": "com.google.distance.delta",
-        "dataSourceId": "derived:com.google.distance.delta:com.google.android.gms:pruned_distance"
+        //"dataSourceId": "derived:com.google.distance.delta:com.google.android.gms:pruned_distance"
       }],
       "bucketByTime": { "durationMillis": 86400000 },
       "startTimeMillis": startDate.setHours(0, 0, 0, 0),
@@ -55,7 +55,7 @@ export class ArhaFitService {
     let dailyStepOptions = {
       "aggregateBy": [{
         "dataTypeName": "com.google.step_count.delta",
-        "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
+        //"dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
       }],
       "bucketByTime": { "durationMillis": 86400000 },
       "startTimeMillis": startDate.setHours(0, 0, 0, 0),
@@ -75,7 +75,7 @@ export class ArhaFitService {
     let dailyStepOptions = {
       "aggregateBy": [{
         "dataTypeName": "com.google.activity.segment",
-        "dataSourceId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments"
+        //"dataSourceId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments"
       }],
       "bucketByTime": { "durationMillis": 86400000 },
       "startTimeMillis": startDate.setHours(0, 0, 0, 0),
