@@ -27,15 +27,14 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
-  getDailyDistanceTotal(): Observable<any> {
+  getDailySummary(dataTypeName: string): Observable<any> {
     let url = 'dataset:aggregate';
     let startDate = new Date();
     let endDate = new Date();
 
     let options = {
       "aggregateBy": [{
-        "dataTypeName": "com.google.distance.delta",
-        //"dataSourceId": "derived:com.google.distance.delta:com.google.android.gms:pruned_distance"
+        "dataTypeName": dataTypeName
       }],
       "bucketByTime": { "durationMillis": 86400000 },
       "startTimeMillis": startDate.setHours(0, 0, 0, 0),
@@ -46,66 +45,6 @@ export class ArhaFitService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-  getDailyStepTotal(): Observable<any> {
-    let url = 'dataset:aggregate';
-    let startDate = new Date();
-    let endDate = new Date();
-
-    let options = {
-      "aggregateBy": [{
-        "dataTypeName": "com.google.step_count.delta",
-        //"dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
-      }],
-      "bucketByTime": { "durationMillis": 86400000 },
-      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
-      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
-    }
-
-    return this.http.get(this.gFitUrl + url, this.getOptionsWithBody(options))
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getActivitySegmentTotal(): Observable<any> {
-    let url = 'dataset:aggregate';
-    let startDate = new Date();
-    let endDate = new Date();
-
-    let options = {
-      "aggregateBy": [{
-        "dataTypeName": "com.google.activity.segment",
-        //"dataSourceId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments"
-      }],
-      "bucketByTime": { "durationMillis": 86400000 },
-      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
-      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
-    }
-
-    return this.http.get(this.gFitUrl + url, this.getOptionsWithBody(options))
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getCaloriesTotal(): Observable<any> {
-    let url = 'dataset:aggregate';
-    let startDate = new Date();
-    let endDate = new Date();
-
-    let options = {
-      "aggregateBy": [{
-        "dataTypeName": "com.google.calories.expended"
-      }],
-      "bucketByTime": { "durationMillis": 86400000 },
-      "startTimeMillis": startDate.setHours(0, 0, 0, 0),
-      "endTimeMillis": endDate.setHours(23, 59, 0, 0)
-    }
-
-    return this.http.get(this.gFitUrl + url, this.getOptionsWithBody(options))
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
 
   getHeader() {
     let token = this.arhaLS.retrieve('gAccessToken');

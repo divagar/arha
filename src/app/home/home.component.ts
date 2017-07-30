@@ -34,17 +34,18 @@ export class HomeComponent implements OnInit {
           //Get fit data source
           this.getFitDataSource();
 
-          //Get daily step total
-          this.getDailyStepTotal();
+          //Get step count
+          this.getDailySummary('com.google.step_count.delta');
 
-          //Get daily step total
-          this.getDailyDistanceTotal();
+          //Get calories
+          this.getDailySummary('com.google.calories.expended');
 
-          //not sure?
-          this.getActivitySegmentTotal();
+          //Get distance
+          this.getDailySummary('com.google.distance.delta');
 
-          //calories
-          this.getCaloriesTotal();
+          //Get activity segment
+          this.getDailySummary('com.google.activity.segment');
+
         }
       });
   }
@@ -59,29 +60,8 @@ export class HomeComponent implements OnInit {
       error => console.log(error));
   }
 
-  getDailyStepTotal() {
-    this.fitService.getDailyStepTotal()
-      .subscribe(
-      any => console.log(any),
-      error => console.log(error));
-  }
-
-  getDailyDistanceTotal() {
-    this.fitService.getDailyDistanceTotal()
-      .subscribe(
-      any => console.log(any),
-      error => console.log(error));
-  }
-
-  getActivitySegmentTotal() {
-    this.fitService.getActivitySegmentTotal()
-      .subscribe(
-      any => console.log(any),
-      error => console.log(error));
-  }
-
-  getCaloriesTotal() {
-    this.fitService.getCaloriesTotal()
+  getDailySummary(dataType) {
+    this.fitService.getDailySummary(dataType)
       .subscribe(
       any => console.log(any),
       error => console.log(error));
