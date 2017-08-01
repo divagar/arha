@@ -46,7 +46,127 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
-  getHeader() {
+  getGActivityType(type) {
+    let activityType = [
+      "In vehicle",
+      "Biking",
+      "On foot",
+      "Still (not moving)",
+      "Unknown (unable to detect activity)",
+      "Tilting (sudden device gravity change)",
+      null,
+      "Walking",
+      "Running",
+      "Aerobics",
+      "Badminton",
+      "Baseball",
+      "Basketball",
+      "Biathlon",
+      "Handbiking",
+      "Mountain biking",
+      "Road biking",
+      "Spinning",
+      "Stationary biking",
+      "Utility biking",
+      "Boxing",
+      "Calisthenics",
+      "Circuit training",
+      "Cricket",
+      "Dancing",
+      "Elliptical",
+      "Fencing",
+      "Football (American)",
+      "Football (Australian)",
+      "Football (Soccer)",
+      "Frisbee",
+      "Gardening",
+      "Golf",
+      "Gymnastics",
+      "Handball",
+      "Hiking",
+      "Hockey",
+      "Horseback riding",
+      "Housework",
+      "Jumping rope",
+      "Kayaking",
+      "Kettlebell training",
+      "Kickboxing",
+      "Kitesurfing",
+      "Martial arts",
+      "Meditation",
+      "Mixed martial arts",
+      "P90X exercises",
+      "Paragliding",
+      "Pilates",
+      "Polo",
+      "Racquetball",
+      "Rock climbing",
+      "Rowing",
+      "Rowing machine",
+      "Rugby",
+      "Jogging",
+      "Running on sand",
+      "Running (treadmill)",
+      "Sailing",
+      "Scuba diving",
+      "Skateboarding",
+      "Skating",
+      "Cross skating",
+      "Inline skating (rollerblading)",
+      "Skiing",
+      "Back-country skiing",
+      "Cross-country skiing",
+      "Downhill skiing",
+      "Kite skiing",
+      "Roller skiing",
+      "Sledding",
+      "Sleeping",
+      "Snowboarding",
+      "Snowmobile",
+      "Snowshoeing",
+      "Squash",
+      "Stair climbing",
+      "Stair-climbing machine",
+      "Stand-up paddleboarding",
+      "Strength training",
+      "Surfing",
+      "Swimming",
+      "Swimming (swimming pool)",
+      "Swimming (open water)",
+      "Table tennis (ping pong)",
+      "Team sports",
+      "Tennis",
+      "Treadmill (walking or running)",
+      "Volleyball",
+      "Volleyball (beach)",
+      "Volleyball (indoor)",
+      "Wakeboarding",
+      "Walking (fitness)",
+      "Nording walking",
+      "Walking (treadmill)",
+      "Waterpolo",
+      "Weightlifting",
+      "Wheelchair",
+      "Windsurfing",
+      "Yoga",
+      "Zumba",
+      "Diving",
+      "Ergometer",
+      "Ice skating",
+      "Indoor skating",
+      "Curling",
+      null,
+      "Other (unclassified fitness activity)",
+      "Light sleep",
+      "Deep sleep",
+      "REM sleep",
+      "Awake (during sleep cycle)"
+    ]
+
+    return activityType[type];
+  }
+
+  private getHeader() {
     let token = this.arhaLS.retrieve('gAccessToken');
 
     let headers = new Headers({
@@ -57,13 +177,13 @@ export class ArhaFitService {
     return headers;
   }
 
-  getOptions() {
+  private getOptions() {
     let options = new RequestOptions({ headers: this.getHeader() });
 
     return options;
   }
 
-  getOptionsWithBody(body) {
+  private getOptionsWithBody(body) {
     let options = new RequestOptions({ method: 'POST', headers: this.getHeader(), body: body });
 
     return options;
