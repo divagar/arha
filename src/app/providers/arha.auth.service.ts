@@ -26,7 +26,8 @@ export class ArhaAuthService {
       var auth2Args = {
         fetch_basic_profile: true,
         client_id: environment.gapi.client_id,
-        scope: 'https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.location.read'
+        scope: 'https://www.googleapis.com/auth/fitness.activity.read \
+        https://www.googleapis.com/auth/fitness.location.read'
       }
       gapi.auth2.init(auth2Args).then(() => {
         this.listenGapi();

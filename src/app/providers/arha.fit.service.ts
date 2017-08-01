@@ -62,6 +62,7 @@ export class ArhaFitService {
 
     return options;
   }
+
   getOptionsWithBody(body) {
     let options = new RequestOptions({ method: 'POST', headers: this.getHeader(), body: body });
 
