@@ -35,17 +35,8 @@ export class HomeComponent implements OnInit {
           this.getFitDataSource();
 
           //Get daily summary
-          //Store the daily summary
-          this.arhaLS.store('gDailySummary', {});
+          this.getAllDailySummary();
 
-          //Get step count
-          this.getDailySummary('com.google.step_count.delta');
-          //Get calories
-          this.getDailySummary('com.google.calories.expended');
-          //Get distance
-          this.getDailySummary('com.google.distance.delta');
-          //Get activity segment
-          this.getDailySummary('com.google.activity.segment');
         }
       });
   }
@@ -58,6 +49,20 @@ export class HomeComponent implements OnInit {
       .subscribe(
       data => console.log(data),
       error => console.log(error));
+  }
+
+  getAllDailySummary() {
+    //Store the daily summary
+    this.arhaLS.store('gDailySummary', {});
+
+    //Get step count
+    this.getDailySummary('com.google.step_count.delta');
+    //Get calories
+    this.getDailySummary('com.google.calories.expended');
+    //Get distance
+    this.getDailySummary('com.google.distance.delta');
+    //Get activity segment
+    this.getDailySummary('com.google.activity.segment');
   }
 
   getDailySummary(dataType) {
