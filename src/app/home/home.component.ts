@@ -34,18 +34,18 @@ export class HomeComponent implements OnInit {
           //Get fit data source
           this.getFitDataSource();
 
+          //Get daily summary
+          //Store the daily summary
+          this.arhaLS.store('gDailySummary', {});
+
           //Get step count
           this.getDailySummary('com.google.step_count.delta');
-
           //Get calories
           this.getDailySummary('com.google.calories.expended');
-
           //Get distance
           this.getDailySummary('com.google.distance.delta');
-
           //Get activity segment
           this.getDailySummary('com.google.activity.segment');
-
         }
       });
   }
@@ -56,14 +56,21 @@ export class HomeComponent implements OnInit {
   getFitDataSource() {
     this.fitService.getDataSource()
       .subscribe(
-      any => console.log(any),
+      data => console.log(data),
       error => console.log(error));
   }
 
   getDailySummary(dataType) {
     this.fitService.getDailySummary(dataType)
       .subscribe(
-      any => console.log(any),
+      data => {
+        let bucketData = data.json()['bucket'][0]['dataset']['0']['point'];
+        if (bucketData != 0) {
+          let gDailySummary = this.arhaLS.retrieve('gDailySummary');
+          gDailySummary[bucketData['0'].dataTypeName] = bucketData;
+          this.arhaLS.store('gDailySummary', gDailySummary);
+        }
+      },
       error => console.log(error));
   }
 

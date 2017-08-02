@@ -27,7 +27,7 @@ export class ArhaFitService {
       .catch(this.handleError);
   }
 
-  getDailySummary(dataTypeName: string): Observable<any> {
+  getDailySummary(dataTypeName: string): Observable<Response> {
     let url = 'dataset:aggregate';
     let startDate = new Date();
     let endDate = new Date();
@@ -41,9 +41,9 @@ export class ArhaFitService {
       "endTimeMillis": endDate.setHours(23, 59, 0, 0)
     }
 
-    return this.http.get(this.gFitUrl + url, this.getOptionsWithBody(options))
-      .map(this.extractData)
-      .catch(this.handleError);
+    let resp = this.http.get(this.gFitUrl + url, this.getOptionsWithBody(options));
+
+    return resp;
   }
 
   getGActivityType(type) {
@@ -191,7 +191,6 @@ export class ArhaFitService {
 
   private extractData(res: Response) {
     let body = res.json();
-    //console.log(body);
     //return body.data || {};
     return body || {};
   }
