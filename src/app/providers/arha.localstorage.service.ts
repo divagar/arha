@@ -15,8 +15,11 @@ export class ArhaLocalStorageService {
 
   public store(key, val) {
     localStorage.setItem(key, JSON.stringify(val));
-    if(this.storageObserver != undefined)
-      this.storageObserver.next({key, val});
+    if(this.storageObserver != undefined) {
+      let obj = {};
+      obj[key] = val;
+      this.storageObserver.next(obj);
+    }
   }
 
   public retrieve(key) {
