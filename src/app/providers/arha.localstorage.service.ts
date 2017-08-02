@@ -16,7 +16,7 @@ export class ArhaLocalStorageService {
   public store(key, val) {
     localStorage.setItem(key, JSON.stringify(val));
     if(this.storageObserver != undefined)
-      this.storageObserver.next(key);
+      this.storageObserver.next({key, val});
   }
 
   public retrieve(key) {
