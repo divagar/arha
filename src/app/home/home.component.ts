@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit {
           //Get daily summary
           this.getAllDailySummary();
 
+          //Display daily summary
+          this.displayDailySummary();
+
         }
       });
   }
@@ -53,7 +56,8 @@ export class HomeComponent implements OnInit {
 
   getAllDailySummary() {
     //Store the daily summary
-    this.arhaLS.store('gDailySummary', {});
+    //this.arhaLS.store('gDailySummaryObj', {});
+    this.arhaLS.store('gDailySummary', []);
 
     //Get step count
     this.getDailySummary('com.google.step_count.delta');
@@ -71,12 +75,32 @@ export class HomeComponent implements OnInit {
       data => {
         let bucketData = data.json()['bucket'][0]['dataset']['0']['point'];
         if (bucketData != 0) {
+
+          //store daily summary object
+          /*let gDailySummaryObj = this.arhaLS.retrieve('gDailySummaryObj');
+          gDailySummaryObj[bucketData['0'].dataTypeName] = bucketData;
+          this.arhaLS.store('gDailySummaryObj', gDailySummaryObj);*/
+
+          //store daily summary
           let gDailySummary = this.arhaLS.retrieve('gDailySummary');
-          gDailySummary[bucketData['0'].dataTypeName] = bucketData;
+          bucketData.forEach(element => {
+            gDailySummary.push(element);
+          });
           this.arhaLS.store('gDailySummary', gDailySummary);
         }
       },
       error => console.log(error));
+  }
+
+  displayDailySummary() {
+    this.arhaLS.storage.subscribe(
+      (fitData) => {
+        console.log(fitData);
+        fitData['gDailySummary'].forEach(element => {
+          console.log(element.dataTypeName);
+        });
+      }
+    )
   }
 
   showLoginSnackBar() {
