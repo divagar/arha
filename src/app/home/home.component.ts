@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   getAllDailySummary() {
     //Store the daily summary
-    //this.arhaLS.store('gDailySummaryObj', {});
+    this.arhaLS.store('gDailySummaryObj', {});
     this.arhaLS.store('gDailySummary', []);
 
     //Get step count
@@ -77,9 +77,9 @@ export class HomeComponent implements OnInit {
         if (bucketData != 0) {
 
           //store daily summary object
-          /*let gDailySummaryObj = this.arhaLS.retrieve('gDailySummaryObj');
+          let gDailySummaryObj = this.arhaLS.retrieve('gDailySummaryObj');
           gDailySummaryObj[bucketData['0'].dataTypeName] = bucketData;
-          this.arhaLS.store('gDailySummaryObj', gDailySummaryObj);*/
+          this.arhaLS.store('gDailySummaryObj', gDailySummaryObj);
 
           //store daily summary
           let gDailySummary = this.arhaLS.retrieve('gDailySummary');
@@ -96,9 +96,11 @@ export class HomeComponent implements OnInit {
     this.arhaLS.storage.subscribe(
       (fitData) => {
         console.log(fitData);
-        fitData['gDailySummary'].forEach(element => {
-          console.log(element.dataTypeName);
-        });
+        if (fitData.hasOwnProperty('gDailySummary')) {
+          fitData['gDailySummary'].forEach(element => {
+            console.log(element.dataTypeName);
+          });
+        }
       }
     )
   }
