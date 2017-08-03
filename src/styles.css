@@ -13,9 +13,9 @@ body {
 .mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content {
     font-family: 'Quicksand', sans-serif !important;
 }
-.mat-sidenav-content {
+/* .mat-sidenav-content {
     width: 100% !important;
-}
+} */
 .mat-sidenav-backdrop.mat-sidenav-shown {
     background-color: rgba(0,0,0,.2);
 }

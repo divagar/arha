@@ -9,3 +9,15 @@
 p {
     text-align: center;
 }
+
+.arha-grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.arha-card {
+    border: 0.1px solid #ccc;
+    background-color: #fff;
+    padding: 50px;
+}

@@ -1,4 +1,8 @@
 <arha-login class="arha-login" *ngIf="!(authState | async)?.uid"></arha-login>
-<p *ngIf="(authState | async)?.uid">
-  Home Placeholder
-</p>
+<div class="arha-grid" *ngIf="(authState | async)?.uid">
+  <div class="arha-card">Steps</div>
+  <div class="arha-card">Distance</div>
+  <div class="arha-card">Calories</div>
+  <div class="arha-card">Sleep</div>
+  <div class="arha-card">Activity</div>
+</div>
