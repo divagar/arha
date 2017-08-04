@@ -14,10 +14,12 @@ p {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(200px, auto);;
+    margin: 5px;
 }
 
 .arha-card {
     border: 0.1px solid #ccc;
     background-color: #fff;
-    padding: 50px;
+    padding: 10px;
 }

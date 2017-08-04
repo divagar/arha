@@ -1,8 +1,8 @@
 <arha-login class="arha-login" *ngIf="!(authState | async)?.uid"></arha-login>
 <div class="arha-grid" *ngIf="(authState | async)?.uid">
-  <div class="arha-card">Steps</div>
-  <div class="arha-card">Distance</div>
-  <div class="arha-card">Calories</div>
-  <div class="arha-card">Sleep</div>
-  <div class="arha-card">Activity</div>
+  <div class="arha-card steps">Steps</div>
+  <div class="arha-card distance">Distance</div>
+  <div class="arha-card caloroies">Calories</div>
+  <div class="arha-card sleep">Sleep</div>
+  <div class="arha-card activity">Activity</div>
 </div>
