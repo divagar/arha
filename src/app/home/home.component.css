@@ -12,8 +12,8 @@ p {
 
 .arha-grid {
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7px;
+    grid-template-columns: repeat(3, 300px);
     grid-auto-rows: minmax(200px, auto);;
     margin: 5px;
 }
@@ -22,4 +22,16 @@ p {
     border: 0.1px solid #ccc;
     background-color: #fff;
     padding: 10px;
+}
+
+.arha-card.sleep {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.arha-card.activity {
+    grid-column-start: 2;
+    grid-column-end: 4;
 }
