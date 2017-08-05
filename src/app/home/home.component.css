@@ -13,8 +13,8 @@ p {
 .arha-grid {
     display: grid;
     grid-gap: 7px;
-    grid-template-columns: repeat(3, 300px);
-    grid-auto-rows: minmax(200px, auto);;
+    grid-template-columns: 25% 25% auto;
+    grid-auto-rows: minmax(200px, auto);
     margin: 5px;
 }
 
