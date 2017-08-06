@@ -31,7 +31,12 @@ p {
 
 /* Steps card */
 .arha-card.steps {
-
+    grid-column-start: 1;
+    /* autoprefixer: off */
+    grid-column-end: 3;
+    grid-row-start: 1;
+    /* autoprefixer: off */
+    grid-row-end: 2;
 }
 .steps-card .mat-card-avatar {
     border-radius: 0px;
@@ -58,9 +63,8 @@ p {
     grid-column-start: 1;
     /* autoprefixer: off */
     grid-column-end: 3;
-    grid-row-start: 1;
+    grid-row-start: 2;
     /* autoprefixer: off */
-    grid-row-end: 3;
 }
 .sleep-card .mat-card-avatar {
     border-radius: 0px;
@@ -83,7 +87,7 @@ p {
 
 /* Activity card */
 .arha-card.activity {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 4;
 }
 .activity-card {
