@@ -12,26 +12,87 @@ p {
 
 .arha-grid {
     display: grid;
-    grid-gap: 7px;
+    grid-gap: 5px;
     grid-template-columns: 25% 25% auto;
-    grid-auto-rows: minmax(200px, auto);
-    margin: 5px;
+    grid-auto-rows: minmax(100%, auto);
 }
-
 .arha-card {
-    border: 0.1px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
+    /* border: 0.1px solid #ccc;
+    background-color: #fff;*/
+    padding: 3px;
+}
+.arha-card md-card {
+    width: auto;
+    height: auto;
+}
+.arha-card md-card-header {
+    padding-bottom: 10px;
 }
 
+/* Steps card */
+.arha-card.steps {
+
+}
+.steps-card .mat-card-avatar {
+    border-radius: 0px;
+}
+.steps-header-image {
+  background-image: url('../../assets/images/steps.png');
+  background-size: cover;
+}
+
+/* Distance card */
+.arha-card.distance {
+
+}
+.distance-card .mat-card-avatar {
+    border-radius: 0px;
+}
+.distance-header-image {
+  background-image: url('../../assets/images/distance.png');
+  background-size: cover;
+}
+
+/* Sleep card */
 .arha-card.sleep {
     grid-column-start: 1;
+    /* autoprefixer: off */
     grid-column-end: 3;
     grid-row-start: 1;
+    /* autoprefixer: off */
     grid-row-end: 3;
 }
+.sleep-card .mat-card-avatar {
+    border-radius: 0px;
+}
+.sleep-header-image {
+  background-image: url('../../assets/images/sleep.png');
+  background-size: cover;
+}
 
+/* Calories card */
+.arha-card.calories {
+}
+.calories-card .mat-card-avatar {
+    border-radius: 0px;
+}
+.calories-header-image {
+  background-image: url('../../assets/images/calories.png');
+  background-size: cover;
+}
+
+/* Activity card */
 .arha-card.activity {
     grid-column-start: 2;
     grid-column-end: 4;
+}
+.activity-card {
+  width: auto;
+}
+.activity-card .mat-card-avatar {
+    border-radius: 0px;
+}
+.activity-header-image {
+  background-image: url('../../assets/images/activity.png');
+  background-size: cover;
 }
