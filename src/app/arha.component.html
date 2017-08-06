@@ -1,4 +1,4 @@
-<md-toolbar color="primary">
+<md-toolbar class="dark-primary-color">
   <div [routerLink]="['/']" class="arha-title">
     <span class="arha-title-text">Arha</span>
   </div>
@@ -11,7 +11,7 @@
 
 <md-sidenav-container class="arha-container">
 
-  <md-sidenav #sidenav class="arha-sidenav" align="end">
+  <md-sidenav #sidenav class="arha-sidenav dark-primary-color" align="end">
     <div class="arha-user row" *ngIf="(authState | async)?.uid">
       <div class="cell">
         <img class="photo" src="{{ (authState | async)?.photoURL }}">

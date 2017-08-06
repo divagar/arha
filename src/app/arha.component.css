@@ -6,6 +6,7 @@
     font-family: 'Pacifico', cursive;
     font-size: 50px;
     cursor: pointer;
+    color: #fff;
 }
 
 .fill-space {
@@ -63,7 +64,6 @@
 
 .arha-sidenav {
     padding: 20px;
-    background: #673AB7;
     min-width: 220px;
 }
 
