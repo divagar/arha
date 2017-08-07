@@ -28,6 +28,10 @@ p {
 .arha-card md-card-header {
     padding-bottom: 10px;
 }
+.arha-card .mat-card-title {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
 
 /* Steps card */
 .arha-card.steps {
