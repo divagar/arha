@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
     private fitService: ArhaFitService,
     private arhaLS: ArhaLocalStorageService,
     private arhaComponent: ArhaComponent) {
+
     this.authState = authService.getAuthStateDetails();
+    this.fitDataStore = {};
 
     //Get af auth status
     this.authState
@@ -98,37 +100,65 @@ export class HomeComponent implements OnInit {
       (fitData) => {
         console.log(fitData);
         if (fitData.hasOwnProperty('gDailySummary')) {
-          let obj = fitData['gDailySummary'];
-          if (obj.hasOwnProperty('com.google.step_count.delta'))
-            this.processSteps(obj);
-          else if (obj.hasOwnProperty('com.google.distance.delta'))
-            this.processDistance(obj);
-          else if (obj.hasOwnProperty('com.google.calories.delta'))
-            this.processCalories(obj);
-          else if (obj.hasOwnProperty('com.google.activity.delta'))
-            this.processSleep(obj);
+          let fit = fitData['gDailySummary'];
+          let query = 'com.google.step_count.delta';
+
+          if (fit.hasOwnProperty(query))
+            this.processSteps(query, fit[query]);
+
+          query = 'com.google.distance.delta';
+          if (fit.hasOwnProperty(query))
+            this.processDistance(query, fit[query]);
+
+          query = 'com.google.calories.expended';
+          if (fit.hasOwnProperty(query))
+            this.processCalories(query, fit[query]);
+
+          query = 'com.google.activity.delta';
+          if (fit.hasOwnProperty(query))
+            this.processSleep(query, fit[query]);
         }
       }
     )
   }
 
-  processSteps(fitData) {
+  processSteps(query, fitData) {
+    if (fitData.hasOwnProperty('0')) {
+      this.fitDataStore[query] = {
+        'startTimeNanos': fitData[0]['startTimeNanos'],
+        'endTimeNanos': fitData[0]['endTimeNanos'],
+        'count': fitData[0]['value']['0']['intVal']
+      };
+    }
+  }
+
+  processDistance(query, fitData) {
+    if (fitData.hasOwnProperty('0')) {
+      this.fitDataStore[query] = {
+        'startTimeNanos': fitData[0]['startTimeNanos'],
+        'endTimeNanos': fitData[0]['endTimeNanos'],
+        'count': ((fitData[0]['value']['0']['fpVal']) / 1000).toFixed(2)
+      };
+    }
+  }
+
+  processSleep(query, fitData) {
+    this.fitDataStore[query] = {};
 
   }
 
-  processDistance(fitData) {
-
+  processCalories(query, fitData) {
+    if (fitData.hasOwnProperty('0')) {
+      this.fitDataStore[query] = {
+        'startTimeNanos': fitData[0]['startTimeNanos'],
+        'endTimeNanos': fitData[0]['endTimeNanos'],
+        'count': (fitData[0]['value']['0']['fpVal']).toFixed(0)
+      };
+    }
   }
 
-  processSleep(fitData) {
-
-  }
-
-  processCalories(fitData) {
-
-  }
-
-  processActivity(fitData) {
+  processActivity(query, fitData) {
+    this.fitDataStore[query] = {};
 
   }
 

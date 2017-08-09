@@ -9,8 +9,8 @@
         <md-card-subtitle></md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <p>
-
+        <p *ngIf="fitDataStore['com.google.step_count.delta']">
+            {{fitDataStore['com.google.step_count.delta'].count}}
         </p>
       </md-card-content>
     </md-card>
@@ -25,8 +25,8 @@
         <md-card-subtitle></md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <p>
-
+        <p *ngIf="fitDataStore['com.google.distance.delta']">
+            {{fitDataStore['com.google.distance.delta'].count}}
         </p>
       </md-card-content>
     </md-card>
@@ -41,8 +41,8 @@
         <md-card-subtitle></md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <p>
-
+        <p *ngIf="fitDataStore['com.google.calories.expended']">
+            {{fitDataStore['com.google.calories.expended'].count}}
         </p>
       </md-card-content>
     </md-card>
