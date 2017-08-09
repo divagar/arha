@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit {
 
   authState: Observable<firebase.User>;
 
+  //Fit data store
+  fitDataStore: object;
+
   constructor(private afAuth: AngularFireAuth,
     private authService: ArhaAuthService,
     private fitService: ArhaFitService,
@@ -32,14 +35,13 @@ export class HomeComponent implements OnInit {
           this.showLoginSnackBar();
 
           //Get fit data source
-          this.getFitDataSource();
+          //this.getFitDataSource();
 
           //Get daily summary
           this.getAllDailySummary();
 
-          //Display daily summary
-          this.displayDailySummary();
-
+          //subscribe daily summary
+          this.subscribeToDailySummary();
         }
       });
   }
@@ -56,15 +58,15 @@ export class HomeComponent implements OnInit {
 
   getAllDailySummary() {
     //Store the daily summary
-    this.arhaLS.store('gDailySummaryObj', {});
-    this.arhaLS.store('gDailySummary', []);
+    //this.arhaLS.store('gDailySummaryArr', []);
+    this.arhaLS.store('gDailySummary', {});
 
     //Get step count
     this.getDailySummary('com.google.step_count.delta');
-    //Get calories
-    this.getDailySummary('com.google.calories.expended');
     //Get distance
     this.getDailySummary('com.google.distance.delta');
+    //Get calories
+    this.getDailySummary('com.google.calories.expended');
     //Get activity segment
     this.getDailySummary('com.google.activity.segment');
   }
@@ -75,34 +77,59 @@ export class HomeComponent implements OnInit {
       data => {
         let bucketData = data.json()['bucket'][0]['dataset']['0']['point'];
         if (bucketData != 0) {
-
-          //store daily summary object
-          let gDailySummaryObj = this.arhaLS.retrieve('gDailySummaryObj');
+          //store daily summary
+          let gDailySummaryObj = this.arhaLS.retrieve('gDailySummary');
           gDailySummaryObj[bucketData['0'].dataTypeName] = bucketData;
-          this.arhaLS.store('gDailySummaryObj', gDailySummaryObj);
+          this.arhaLS.store('gDailySummary', gDailySummaryObj);
 
           //store daily summary
-          let gDailySummary = this.arhaLS.retrieve('gDailySummary');
-          bucketData.forEach(element => {
-            gDailySummary.push(element);
-          });
-          this.arhaLS.store('gDailySummary', gDailySummary);
+          // let gDailySummary = this.arhaLS.retrieve('gDailySummaryArr');
+          // bucketData.forEach(element => {
+          //   gDailySummary.push(element);
+          // });
+          // this.arhaLS.store('gDailySummaryArr', gDailySummary);
         }
       },
       error => console.log(error));
   }
 
-  displayDailySummary() {
+  subscribeToDailySummary() {
     this.arhaLS.storage.subscribe(
       (fitData) => {
         console.log(fitData);
         if (fitData.hasOwnProperty('gDailySummary')) {
-          fitData['gDailySummary'].forEach(element => {
-            console.log(element.dataTypeName);
-          });
+          let obj = fitData['gDailySummary'];
+          if (obj.hasOwnProperty('com.google.step_count.delta'))
+            this.processSteps(obj);
+          else if (obj.hasOwnProperty('com.google.distance.delta'))
+            this.processDistance(obj);
+          else if (obj.hasOwnProperty('com.google.calories.delta'))
+            this.processCalories(obj);
+          else if (obj.hasOwnProperty('com.google.activity.delta'))
+            this.processSleep(obj);
         }
       }
     )
+  }
+
+  processSteps(fitData) {
+
+  }
+
+  processDistance(fitData) {
+
+  }
+
+  processSleep(fitData) {
+
+  }
+
+  processCalories(fitData) {
+
+  }
+
+  processActivity(fitData) {
+
   }
 
   showLoginSnackBar() {
