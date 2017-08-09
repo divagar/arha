@@ -114,9 +114,9 @@ export class HomeComponent implements OnInit {
           if (fit.hasOwnProperty(query))
             this.processCalories(query, fit[query]);
 
-          query = 'com.google.activity.delta';
+          query = 'com.google.activity.summary';
           if (fit.hasOwnProperty(query))
-            this.processSleep(query, fit[query]);
+            this.processActivity(query, fit[query]);
         }
       }
     )
@@ -158,8 +158,16 @@ export class HomeComponent implements OnInit {
   }
 
   processActivity(query, fitData) {
-    this.fitDataStore[query] = {};
-
+    fitData.forEach(element => {
+      let activityType = element['value']['0']['intVal'];
+      let activityName = this.fitService.getGActivityType(activityType);
+      this.fitDataStore[activityName] = {
+        'startTimeNanos': element['startTimeNanos'],
+        'endTimeNanos': element['endTimeNanos'],
+        'count': element['value']['1']['intVal']
+      };
+    });
+    console.log(this.fitDataStore);
   }
 
   showLoginSnackBar() {

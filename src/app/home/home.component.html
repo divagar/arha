@@ -10,7 +10,7 @@
       </md-card-header>
       <md-card-content>
         <p *ngIf="fitDataStore['com.google.step_count.delta']">
-            {{fitDataStore['com.google.step_count.delta'].count}}
+          {{fitDataStore['com.google.step_count.delta'].count}}
         </p>
       </md-card-content>
     </md-card>
@@ -26,7 +26,7 @@
       </md-card-header>
       <md-card-content>
         <p *ngIf="fitDataStore['com.google.distance.delta']">
-            {{fitDataStore['com.google.distance.delta'].count}}
+          {{fitDataStore['com.google.distance.delta'].count}} KM
         </p>
       </md-card-content>
     </md-card>
@@ -42,7 +42,7 @@
       </md-card-header>
       <md-card-content>
         <p *ngIf="fitDataStore['com.google.calories.expended']">
-            {{fitDataStore['com.google.calories.expended'].count}}
+          {{fitDataStore['com.google.calories.expended'].count}}
         </p>
       </md-card-content>
     </md-card>
@@ -57,8 +57,11 @@
         <md-card-subtitle></md-card-subtitle>
       </md-card-header>
       <md-card-content>
-        <p>
-
+        <p *ngIf="fitDataStore['Deep sleep']">
+          Deep Sleep : {{(fitDataStore['Deep sleep'].count / (3600*1000)).toFixed(2)}} Hrs
+        </p>
+        <p *ngIf="fitDataStore['Light sleep']">
+          Light Sleep : {{(fitDataStore['Light sleep'].count / (3600*1000)).toFixed(2)}} Hrs
         </p>
       </md-card-content>
     </md-card>
