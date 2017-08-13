@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { ArhaComponent } from './arha.component';
 import { HomeComponent } from './home/home.component';
+import { FitStepsComponent } from './home/fit.steps.component';
 import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +26,8 @@ import { ArhaLocalStorageService } from './providers/arha.localstorage.service';
     HomeComponent,
     TipsComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    FitStepsComponent
   ],
   imports: [
     BrowserModule,

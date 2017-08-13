@@ -1,11 +1,14 @@
 import { Component, OnInit, ElementRef, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
-import { ArhaComponent } from '../arha.component';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
+import { ArhaComponent } from '../arha.component';
+import { FitStepsComponent } from './fit.steps.component';
 import { ArhaAuthService } from '../providers/arha.auth.service';
 import { ArhaFitService } from '../providers/arha.fit.service';
 import { ArhaLocalStorageService } from '../providers/arha.localstorage.service';
+
 import * as Highcharts from 'highcharts/highcharts.src';
 import * as HighchartsMore from 'highcharts/highcharts-more.src';
 import * as HighchartsGauge from 'highcharts/modules/solid-gauge.src';
