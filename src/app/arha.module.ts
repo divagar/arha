@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { ArhaComponent } from './arha.component';
 import { HomeComponent } from './home/home.component';
 import { FitStepsComponent } from './home/fit.steps.component';
+import { FitDistanceComponent } from './home/fit.distance.component';
 import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
@@ -27,7 +28,8 @@ import { ArhaLocalStorageService } from './providers/arha.localstorage.service';
     TipsComponent,
     AboutComponent,
     LoginComponent,
-    FitStepsComponent
+    FitStepsComponent,
+    FitDistanceComponent
   ],
   imports: [
     BrowserModule,

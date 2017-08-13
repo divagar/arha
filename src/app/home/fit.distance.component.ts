@@ -8,12 +8,12 @@ import { ArhaLocalStorageService } from '../providers/arha.localstorage.service'
 import { ArhaAuthService } from '../providers/arha.auth.service';
 
 @Component({
-    selector: 'arha-fit-steps',
-    templateUrl: './fit.steps.component.html',
+    selector: 'arha-fit-distance',
+    templateUrl: './fit.distance.component.html',
     styleUrls: ['./home.component.css']
 })
 
-export class FitStepsComponent implements OnInit {
+export class FitDistanceComponent implements OnInit {
 
     authState: Observable<firebase.User>;
     fitDataStore: object;
@@ -41,23 +41,24 @@ export class FitStepsComponent implements OnInit {
             fitData => {
                 if (fitData.hasOwnProperty('gDailySummary')) {
                     let fit = fitData['gDailySummary'];
-                    let query = 'com.google.step_count.delta';
+                    let query = 'com.google.distance.delta';
 
                     if (fit.hasOwnProperty(query))
-                        this.processSteps(query, fit[query]);
+                        this.processDistance(query, fit[query]);
                 }
             }
         )
     }
 
-    processSteps(query, fitData) {
+    processDistance(query, fitData) {
         if (fitData.hasOwnProperty('0')) {
             this.fitDataStore[query] = {
                 'startTimeNanos': fitData[0]['startTimeNanos'],
                 'endTimeNanos': fitData[0]['endTimeNanos'],
-                'count': fitData[0]['value']['0']['intVal']
+                'count': ((fitData[0]['value']['0']['fpVal']) / 1000).toFixed(2)
             };
         }
     }
+
 
 }

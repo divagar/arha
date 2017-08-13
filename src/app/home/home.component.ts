@@ -110,19 +110,12 @@ export class HomeComponent implements OnInit {
   }
 
   subscribeToDailySummary() {
-    this.arhaLS.storage.subscribe(
-      (fitData) => {
+    this.arhaLS.getMessage().subscribe(
+      fitData => {
         console.log(fitData);
         if (fitData.hasOwnProperty('gDailySummary')) {
           let fit = fitData['gDailySummary'];
-          let query = 'com.google.step_count.delta';
-
-          if (fit.hasOwnProperty(query))
-            this.processSteps(query, fit[query]);
-
-          query = 'com.google.distance.delta';
-          if (fit.hasOwnProperty(query))
-            this.processDistance(query, fit[query]);
+          let query;
 
           query = 'com.google.calories.expended';
           if (fit.hasOwnProperty(query))
@@ -134,26 +127,6 @@ export class HomeComponent implements OnInit {
         }
       }
     )
-  }
-
-  processSteps(query, fitData) {
-    if (fitData.hasOwnProperty('0')) {
-      this.fitDataStore[query] = {
-        'startTimeNanos': fitData[0]['startTimeNanos'],
-        'endTimeNanos': fitData[0]['endTimeNanos'],
-        'count': fitData[0]['value']['0']['intVal']
-      };
-    }
-  }
-
-  processDistance(query, fitData) {
-    if (fitData.hasOwnProperty('0')) {
-      this.fitDataStore[query] = {
-        'startTimeNanos': fitData[0]['startTimeNanos'],
-        'endTimeNanos': fitData[0]['endTimeNanos'],
-        'count': ((fitData[0]['value']['0']['fpVal']) / 1000).toFixed(2)
-      };
-    }
   }
 
   processSleep(query, fitData) {
