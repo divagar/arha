@@ -19,9 +19,10 @@ export class FitDistanceComponent implements OnInit {
     fitDataStore: object;
 
     constructor(private arhaLS: ArhaLocalStorageService,
-        private authService: ArhaAuthService, ) {
+        private authService: ArhaAuthService) {
         this.authState = authService.getAuthStateDetails();
         this.fitDataStore = {};
+
         //Get af auth status
         this.authState
             .subscribe(result => {

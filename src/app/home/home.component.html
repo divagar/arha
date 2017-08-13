@@ -15,21 +15,7 @@
 
 
   <div class="arha-card sleep">
-    <md-card class="sleep-card">
-      <md-card-header>
-        <div md-card-avatar class="sleep-header-image"></div>
-        <md-card-title>Sleep</md-card-title>
-        <md-card-subtitle></md-card-subtitle>
-      </md-card-header>
-      <md-card-content>
-        <p *ngIf="fitDataStore['Deep sleep']">
-          Deep Sleep : {{(fitDataStore['Deep sleep'].count / (3600*1000)).toFixed(2)}} Hrs
-        </p>
-        <p *ngIf="fitDataStore['Light sleep']">
-          Light Sleep : {{(fitDataStore['Light sleep'].count / (3600*1000)).toFixed(2)}} Hrs
-        </p>
-      </md-card-content>
-    </md-card>
+    <arha-fit-sleep></arha-fit-sleep>
   </div>
 
 
