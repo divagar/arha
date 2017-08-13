@@ -117,10 +117,6 @@ export class HomeComponent implements OnInit {
           let fit = fitData['gDailySummary'];
           let query;
 
-          query = 'com.google.calories.expended';
-          if (fit.hasOwnProperty(query))
-            this.processCalories(query, fit[query]);
-
           query = 'com.google.activity.summary';
           if (fit.hasOwnProperty(query))
             this.processActivity(query, fit[query]);
@@ -132,16 +128,6 @@ export class HomeComponent implements OnInit {
   processSleep(query, fitData) {
     this.fitDataStore[query] = {};
 
-  }
-
-  processCalories(query, fitData) {
-    if (fitData.hasOwnProperty('0')) {
-      this.fitDataStore[query] = {
-        'startTimeNanos': fitData[0]['startTimeNanos'],
-        'endTimeNanos': fitData[0]['endTimeNanos'],
-        'count': (fitData[0]['value']['0']['fpVal']).toFixed(0)
-      };
-    }
   }
 
   processActivity(query, fitData) {
