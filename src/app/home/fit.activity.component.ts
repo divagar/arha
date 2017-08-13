@@ -87,7 +87,7 @@ export class FitActivityComponent implements OnInit {
 
             credits: { enabled: false },
 
-            colors: ['#512DA8', '#FBC02D', '#F57C00'],
+            colors: ['#512DA8', '#FBC02D', '#E64A19'],
 
             tooltip: {
                 borderWidth: 0,
@@ -99,8 +99,8 @@ export class FitActivityComponent implements OnInit {
                 pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
                 positioner: function (labelWidth) {
                     return {
-                        x: 200 - labelWidth / 2,
-                        y: 180
+                        x: 290 - labelWidth / 2,
+                        y: 160
                     };
                 }
             },
