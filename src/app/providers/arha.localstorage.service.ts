@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ArhaLocalStorageService {
 
-  private storageObserver: any;
-  public storage: any;
+  private subject = new Subject<any>();
 
   constructor() {
-    this.storage = Observable.create(observer => {
-      this.storageObserver = observer;
-    });
+  }
+
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
   }
 
   public store(key, val) {
     localStorage.setItem(key, JSON.stringify(val));
-    if(this.storageObserver != undefined) {
-      let obj = {};
-      obj[key] = val;
-      this.storageObserver.next(obj);
-    }
+    let obj = {};
+    obj[key] = val;
+    this.subject.next(obj);
   }
 
   public retrieve(key) {
