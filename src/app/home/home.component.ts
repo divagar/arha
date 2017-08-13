@@ -9,11 +9,6 @@ import { ArhaAuthService } from '../providers/arha.auth.service';
 import { ArhaFitService } from '../providers/arha.fit.service';
 import { ArhaLocalStorageService } from '../providers/arha.localstorage.service';
 
-import * as Highcharts from 'highcharts/highcharts.src';
-import * as HighchartsMore from 'highcharts/highcharts-more.src';
-import * as HighchartsGauge from 'highcharts/modules/solid-gauge.src';
-import 'highcharts/adapters/standalone-framework.src';
-
 @Component({
   selector: 'arha-home',
   templateUrl: './home.component.html',
@@ -24,13 +19,6 @@ export class HomeComponent implements OnInit {
 
   authState: Observable<firebase.User>;
 
-  //Fit data store
-  fitDataStore: object;
-
-  //chart
-  @ViewChild('chart') public chartEl: ElementRef;
-  private _chart: any;
-
   constructor(private afAuth: AngularFireAuth,
     private authService: ArhaAuthService,
     private fitService: ArhaFitService,
@@ -38,10 +26,6 @@ export class HomeComponent implements OnInit {
     private arhaComponent: ArhaComponent) {
 
     this.authState = authService.getAuthStateDetails();
-    this.fitDataStore = {};
-
-    HighchartsMore(Highcharts);
-    HighchartsGauge(Highcharts);
 
     //Get af auth status
     this.authState
@@ -56,8 +40,6 @@ export class HomeComponent implements OnInit {
           //Get daily summary
           this.getAllDailySummary();
 
-          //subscribe daily summary
-          this.subscribeToDailySummary();
         }
       });
   }
@@ -107,151 +89,6 @@ export class HomeComponent implements OnInit {
         }
       },
       error => console.log(error));
-  }
-
-  subscribeToDailySummary() {
-    this.arhaLS.getMessage().subscribe(
-      fitData => {
-        console.log(fitData);
-        if (fitData.hasOwnProperty('gDailySummary')) {
-          let fit = fitData['gDailySummary'];
-          let query;
-
-          query = 'com.google.activity.summary';
-          if (fit.hasOwnProperty(query))
-            this.processActivity(query, fit[query]);
-        }
-      }
-    )
-  }
-
-  processSleep(query, fitData) {
-    this.fitDataStore[query] = {};
-
-  }
-
-  processActivity(query, fitData) {
-    fitData.forEach(element => {
-      let activityType = element['value']['0']['intVal'];
-      let activityName = this.fitService.getGActivityType(activityType);
-      this.fitDataStore[activityName] = {
-        'startTimeNanos': element['startTimeNanos'],
-        'endTimeNanos': element['endTimeNanos'],
-        'count': element['value']['1']['intVal']
-      };
-    });
-    console.log(this.fitDataStore);
-
-    //chart
-    let chartOpts: any = {
-
-      title: {
-        text: '',
-        style: {
-          fontSize: '24px'
-        }
-      },
-
-      credits: { enabled: false },
-
-      colors: ['#F62366', '#9DFF02', '#0CCDD6'],
-
-      tooltip: {
-        borderWidth: 0,
-        backgroundColor: 'none',
-        shadow: false,
-        style: {
-          fontSize: '16px'
-        },
-        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}%</span>',
-        positioner: function (labelWidth) {
-          return {
-            x: 200 - labelWidth / 2,
-            y: 180
-          };
-        }
-      },
-
-      pane: {
-        startAngle: 0,
-        endAngle: 360,
-        background: [{ // Track for Move
-          outerRadius: '112%',
-          innerRadius: '88%',
-          backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-            .setOpacity(0.3)
-            .get(),
-          borderWidth: 0
-        }, { // Track for Exercise
-          outerRadius: '87%',
-          innerRadius: '63%',
-          backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
-            .setOpacity(0.3)
-            .get(),
-          borderWidth: 0
-        }, { // Track for Stand
-          outerRadius: '62%',
-          innerRadius: '38%',
-          backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
-            .setOpacity(0.3)
-            .get(),
-          borderWidth: 0
-        }]
-      },
-
-      yAxis: {
-        min: 0,
-        max: 100,
-        lineWidth: 0,
-        tickPositions: []
-      },
-
-      plotOptions: {
-        solidgauge: {
-          dataLabels: {
-            enabled: false
-          },
-          linecap: 'round',
-          stickyTracking: false,
-          rounded: true
-        }
-      },
-
-      series: [{
-        name: 'Move',
-        data: [{
-          color: Highcharts.getOptions().colors[0],
-          radius: '112%',
-          innerRadius: '88%',
-          y: 80
-        }]
-      }, {
-        name: 'Exercise',
-        data: [{
-          color: Highcharts.getOptions().colors[1],
-          radius: '87%',
-          innerRadius: '63%',
-          y: 65
-        }]
-      }, {
-        name: 'Stand',
-        data: [{
-          color: Highcharts.getOptions().colors[2],
-          radius: '62%',
-          innerRadius: '38%',
-          y: 50
-        }]
-      }]
-    };
-
-    if (this.chartEl && this.chartEl.nativeElement) {
-      chartOpts.chart = {
-        type: 'solidgauge',
-        renderTo: this.chartEl.nativeElement
-      };
-      this._chart = new Highcharts.Chart(chartOpts);
-    }
-
   }
 
   showLoginSnackBar() {

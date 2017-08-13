@@ -16,6 +16,7 @@ import { FitStepsComponent } from './home/fit.steps.component';
 import { FitDistanceComponent } from './home/fit.distance.component';
 import { FitCaloriesComponent } from './home/fit.calories.component';
 import { FitSleepComponent } from './home/fit.sleep.component';
+import { FitActivityComponent } from './home/fit.activity.component';
 import { TipsComponent } from './tips/tips.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +34,8 @@ import { ArhaLocalStorageService } from './providers/arha.localstorage.service';
     FitStepsComponent,
     FitDistanceComponent,
     FitCaloriesComponent,
-    FitSleepComponent
+    FitSleepComponent,
+    FitActivityComponent
   ],
   imports: [
     BrowserModule,
