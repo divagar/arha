@@ -24,8 +24,7 @@ export class FitActivityComponent implements OnInit {
     authState: Observable<firebase.User>;
     fitDataStore: object;
 
-    //chart
-    @ViewChild('chart') public chartEl: ElementRef;
+    @ViewChild('activityChart') public chartEl: ElementRef;
     private _chart: any;
 
     constructor(private arhaLS: ArhaLocalStorageService,
@@ -79,7 +78,6 @@ export class FitActivityComponent implements OnInit {
 
         //chart
         let chartOpts: any = {
-
             title: {
                 text: '',
                 style: {
@@ -89,7 +87,7 @@ export class FitActivityComponent implements OnInit {
 
             credits: { enabled: false },
 
-            colors: ['#F62366', '#9DFF02', '#0CCDD6'],
+            colors: ['#512DA8', '#FBC02D', '#F57C00'],
 
             tooltip: {
                 borderWidth: 0,
@@ -105,33 +103,6 @@ export class FitActivityComponent implements OnInit {
                         y: 180
                     };
                 }
-            },
-
-            pane: {
-                startAngle: 0,
-                endAngle: 360,
-                background: [{ // Track for Move
-                    outerRadius: '112%',
-                    innerRadius: '88%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-                        .setOpacity(0.3)
-                        .get(),
-                    borderWidth: 0
-                }, { // Track for Exercise
-                    outerRadius: '87%',
-                    innerRadius: '63%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
-                        .setOpacity(0.3)
-                        .get(),
-                    borderWidth: 0
-                }, { // Track for Stand
-                    outerRadius: '62%',
-                    innerRadius: '38%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
-                        .setOpacity(0.3)
-                        .get(),
-                    borderWidth: 0
-                }]
             },
 
             yAxis: {
@@ -150,34 +121,61 @@ export class FitActivityComponent implements OnInit {
                     stickyTracking: false,
                     rounded: true
                 }
-            },
+            }
+        }
 
-            series: [{
-                name: 'Move',
-                data: [{
-                    color: Highcharts.getOptions().colors[0],
-                    radius: '112%',
-                    innerRadius: '88%',
-                    y: 80
-                }]
-            }, {
-                name: 'Exercise',
-                data: [{
-                    color: Highcharts.getOptions().colors[1],
-                    radius: '87%',
-                    innerRadius: '63%',
-                    y: 65
-                }]
-            }, {
-                name: 'Stand',
-                data: [{
-                    color: Highcharts.getOptions().colors[2],
-                    radius: '62%',
-                    innerRadius: '38%',
-                    y: 50
-                }]
+        chartOpts['pane'] = {
+            startAngle: 0,
+            endAngle: 360,
+            background: [{ // Track for Walking
+                outerRadius: '112%',
+                innerRadius: '88%',
+                backgroundColor: Highcharts.Color(chartOpts.colors[0])
+                    .setOpacity(0.3)
+                    .get(),
+                borderWidth: 0
+            }, { // Track for Running
+                outerRadius: '87%',
+                innerRadius: '63%',
+                backgroundColor: Highcharts.Color(chartOpts.colors[1])
+                    .setOpacity(0.3)
+                    .get(),
+                borderWidth: 0
+            }, { // Track for Still
+                outerRadius: '62%',
+                innerRadius: '38%',
+                backgroundColor: Highcharts.Color(chartOpts.colors[2])
+                    .setOpacity(0.3)
+                    .get(),
+                borderWidth: 0
             }]
-        };
+        }
+
+        chartOpts['series'] = [{
+            name: 'Walking',
+            data: [{
+                color: chartOpts.colors[0],
+                radius: '112%',
+                innerRadius: '88%',
+                y: 80
+            }]
+        }, {
+            name: 'Running',
+            data: [{
+                color: chartOpts.colors[1],
+                radius: '87%',
+                innerRadius: '63%',
+                y: 65
+            }]
+        }, {
+            name: 'Still',
+            data: [{
+                color: chartOpts.colors[2],
+                radius: '62%',
+                innerRadius: '38%',
+                y: 50
+            }]
+        }]
 
         if (this.chartEl && this.chartEl.nativeElement) {
             chartOpts.chart = {
