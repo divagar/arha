@@ -55,7 +55,8 @@ export class FitCaloriesComponent implements OnInit {
             this.fitDataStore[query] = {
                 'startTimeNanos': fitData[0]['startTimeNanos'],
                 'endTimeNanos': fitData[0]['endTimeNanos'],
-                'count': (fitData[0]['value']['0']['fpVal']).toFixed(0)
+                'count': (fitData[0]['value']['0']['fpVal']).toFixed(0),
+                'percentage': 100 / (2200 / (fitData[0]['value']['0']['fpVal']))
             };
         }
     }

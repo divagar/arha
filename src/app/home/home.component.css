@@ -94,6 +94,9 @@ p {
   background-image: url('../../assets/images/calories.png');
   background-size: cover;
 }
+.calories-card md-progress-bar {
+    margin-top: 20px;
+}
 
 /* Activity card */
 .arha-card.activity {

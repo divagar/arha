@@ -7,7 +7,7 @@
   <md-card-content>
 
     <div *ngIf="fitDataStore['com.google.step_count.delta']">
-      <md-progress-bar class="example-margin" color="Primary" mode="buffer" value="{{fitDataStore['com.google.step_count.delta'].percentage}}"
+      <md-progress-bar color="Primary" mode="buffer" value="{{fitDataStore['com.google.step_count.delta'].percentage}}"
         bufferValue="0">
       </md-progress-bar>
       <p>
