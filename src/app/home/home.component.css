@@ -21,16 +21,16 @@ p {
     background-color: #fff;*/
     padding: 3px;
 }
-.arha-card md-card {
+.arha-grid md-card {
     width: auto;
     height: auto;
 }
-.arha-card md-card-header {
+.arha-grid md-card-header {
     padding-bottom: 10px;
 }
-.arha-card .mat-card-title {
-    margin-top: 10px;
-    margin-bottom: 0px;
+.arha-grid mat-card-title {
+    margin-top: 10px !important;
+    margin-bottom: 0px !important;
 }
 
 /* Steps card */
