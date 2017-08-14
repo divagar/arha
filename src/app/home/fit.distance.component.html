@@ -5,8 +5,15 @@
         <md-card-subtitle></md-card-subtitle>
     </md-card-header>
     <md-card-content>
-        <p *ngIf="fitDataStore['com.google.distance.delta']">
-            {{fitDataStore['com.google.distance.delta'].count}} KM
-        </p>
+
+        <div *ngIf="fitDataStore['com.google.distance.delta']">
+            <md-progress-bar class="example-margin" color="Primary" mode="buffer" value="{{fitDataStore['com.google.distance.delta'].percentage}}"
+                bufferValue="0">
+            </md-progress-bar>
+            <p>
+                {{fitDataStore['com.google.distance.delta'].count}} of 8 KM
+            </p>
+        </div>
+
     </md-card-content>
 </md-card>

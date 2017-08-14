@@ -56,7 +56,8 @@ export class FitDistanceComponent implements OnInit {
             this.fitDataStore[query] = {
                 'startTimeNanos': fitData[0]['startTimeNanos'],
                 'endTimeNanos': fitData[0]['endTimeNanos'],
-                'count': ((fitData[0]['value']['0']['fpVal']) / 1000).toFixed(2)
+                'count': ((fitData[0]['value']['0']['fpVal']) / 1000).toFixed(2),
+                'percentage': 100 / (8 / ((fitData[0]['value']['0']['fpVal']) / 1000))
             };
         }
     }

@@ -64,6 +64,9 @@ p {
   background-image: url('../../assets/images/distance.png');
   background-size: cover;
 }
+.distance-card md-progress-bar {
+    margin-top: 20px;
+}
 
 /* Sleep card */
 .arha-card.sleep {
