@@ -56,7 +56,8 @@ export class FitStepsComponent implements OnInit {
             this.fitDataStore[query] = {
                 'startTimeNanos': fitData[0]['startTimeNanos'],
                 'endTimeNanos': fitData[0]['endTimeNanos'],
-                'count': fitData[0]['value']['0']['intVal']
+                'count': fitData[0]['value']['0']['intVal'],
+                'percentage': 100 / (10000 / (fitData[0]['value']['0']['intVal']))
             };
         }
     }

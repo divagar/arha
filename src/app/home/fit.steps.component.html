@@ -5,8 +5,15 @@
     <md-card-subtitle></md-card-subtitle>
   </md-card-header>
   <md-card-content>
-    <p *ngIf="fitDataStore['com.google.step_count.delta']">
-      {{fitDataStore['com.google.step_count.delta'].count}}
-    </p>
+
+    <div *ngIf="fitDataStore['com.google.step_count.delta']">
+      <md-progress-bar class="example-margin" color="Primary" mode="buffer" value="{{fitDataStore['com.google.step_count.delta'].percentage}}"
+        bufferValue="0">
+      </md-progress-bar>
+      <p>
+        {{fitDataStore['com.google.step_count.delta'].count}} of 10000
+      </p>
+    </div>
+
   </md-card-content>
 </md-card>

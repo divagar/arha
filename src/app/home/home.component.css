@@ -49,6 +49,9 @@ p {
   background-image: url('../../assets/images/steps.png');
   background-size: cover;
 }
+.steps-card md-progress-bar {
+    margin-top: 20px;
+}
 
 /* Distance card */
 .arha-card.distance {
