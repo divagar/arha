@@ -5,19 +5,15 @@
         <md-card-subtitle></md-card-subtitle>
     </md-card-header>
     <md-card-content>
-        <p *ngIf="fitDataStore['Deep sleep']">
-            Deep Sleep : {{fitDataStore['Deep sleep'].count }} Hrs
-        </p>
-        <p *ngIf="fitDataStore['Light sleep']">
-            Light Sleep : {{fitDataStore['Light sleep'].count }} Hrs
-        </p>
 
-        <!-- <div *ngIf="fitDataStore['Light sleep']">
-            <md-progress-bar color="Primary" mode="buffer" value="{{fitDataStore['com.google.calories.expended'].percentage}}" bufferValue="0">
+        <div *ngIf="fitDataStore['Deep sleep'] && fitDataStore['Light sleep']">
+            <md-progress-bar color="Primary" mode="buffer" value="{{fitDataStore['Deep sleep'].percentage}}"
+            bufferValue="{{fitDataStore['Light sleep'].percentage + fitDataStore['Deep sleep'].percentage}}">
             </md-progress-bar>
             <p>
-                {{fitDataStore['com.google.calories.expended'].count}} of 2200
+                Deep : {{fitDataStore['Deep sleep'].count }} Hrs | Light : {{fitDataStore['Light sleep'].count }} Hrs
             </p>
-        </div> -->
+        </div>
+
     </md-card-content>
 </md-card>

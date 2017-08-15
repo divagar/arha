@@ -83,6 +83,9 @@ p {
   background-image: url('../../assets/images/sleep.png');
   background-size: cover;
 }
+.sleep-card md-progress-bar {
+    margin-top: 20px;
+}
 
 /* Calories card */
 .arha-card.calories {
