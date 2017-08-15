@@ -60,7 +60,7 @@ export class FitSleepComponent implements OnInit {
             this.fitDataStore[activityName] = {
                 'startTimeNanos': element['startTimeNanos'],
                 'endTimeNanos': element['endTimeNanos'],
-                'count': element['value']['1']['intVal']
+                'count': ((element['value']['1']['intVal']) / (3600*1000)).toFixed(2),
             };
         });
     }
